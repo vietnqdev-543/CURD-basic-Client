@@ -17,9 +17,8 @@ import storage from 'redux-persist/lib/storage'
 //redux persist
 const persistConfig = {
   key: 'root',
-  version: 1,
   storage :storage ,
-  blacklist : ['account' ] //blacklist === sẽ không được lưu trên localstorage
+  whitelist : ['account' ] 
 }
 
 const rootReducer = combineReducers({

@@ -1,31 +1,10 @@
 import { useEffect, useState } from "react"
-import { callCreateProduct, callFetchAllProduct, callFetchUser } from "../../services/api"
-import { Button, Card, Col, Row  ,Modal, message} from "antd"
+import { callFetchAllProduct , callCreateProduct } from "../../services/productApi"
+import { Button, Card, Col, Row, message } from "antd"
 import AddProductModal from "./AddProductModal/AddProductModal"
-const {Meta}= Card
+const { Meta } = Card
 const ProductPage = () => {
   const [listProduct, setListProduct] = useState([])
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const showModal = () => {
-    setIsModalOpen(true);
-  };
-  const handleCancel = () => {
-    setIsModalOpen(false);
-  };
-  const handleSubmit = async(values)=> {
-    const {name , brand, price , description } = values
-    const res = await callCreateProduct(values)
-    console.log('check' ,res)
-   try {
-      message.success('Create product Succesfully')
-      setIsModalOpen(false)
-      window.location.reload();
-   } catch (error) {
-      message.error(error.message)
-      setIsModalOpen(false)
-   }
-  }
-
   useEffect(() => {
     handleFetchAccount()
   }, [])
@@ -43,34 +22,35 @@ const ProductPage = () => {
 
   return (
     <div>
-      <div style={{padding: '30px 0px' , display:'flex' ,alignItems:'center' , gap:'20px'}}>
+      <div style={{ padding: '30px 0px', display: 'flex', alignItems: 'center', gap: '20px' }}>
         <h1>Product Page</h1>
-        <Button onClick={showModal}>Add Product</Button>
       </div>
-      <Row >
+      <Row gutter={{ xs: 8, sm: 16, md: 24, lg: 32 }}>
         {listProduct.map((item, index) => (
-          <Col key={index} onClick={()=>{console.log(123)}} span={4}>
+          <Col span={4}  key={index} onClick={() => { console.log(123) }} >
             <Card
               hoverable
               style={{
                 width: 240,
               }}
-              cover={<img alt="example" src="https://os.alipayobjects.com/rmsportal/QBnOOoLaAfKPirc.png" />}
+              cover={<img alt="example" src={item.image} />}
             >
-              <Meta title={item.name} description = {item.description} />
+              <Meta title={item.name}  />
               {item.price ?
-                <Meta style={{fontSize:'30px' , fontWeight:'bold' }} description={`${item.price.toLocaleString('vi-VN', {
-                  style: 'currency',
-                  currency: 'VND',
-                })}`} />
-              :
-                <Meta description = 'Sold out' />        
+                <div style={{ fontSize: '25px', fontWeight: 'bold' , color:'darkred' }}>
+                  {`${item.price.toLocaleString('vi-VN', {
+                    style: 'currency',
+                    currency: 'VND',
+                  })}`}
+                </div>
+                :
+                <Meta description='Sold out' />
               }
             </Card>
           </Col>
         ))}
       </Row>
-      <AddProductModal isModalOpen={isModalOpen} handleCancel={handleCancel}  handleSubmit={handleSubmit}/>
+    
     </div>
   )
 }

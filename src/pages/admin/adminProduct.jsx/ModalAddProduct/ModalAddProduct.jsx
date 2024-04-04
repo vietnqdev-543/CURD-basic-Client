@@ -1,7 +1,7 @@
 import React from 'react'
 import { Modal, Form, Input, Checkbox ,Button } from 'antd'
 
-const AddProductModal = (props) => {
+const ModalAddProduct = (props) => {
     const { isModalOpen, handleCancel, handleSubmit} = props
     const [form] = Form.useForm()
     return (
@@ -89,20 +89,11 @@ const AddProductModal = (props) => {
                         <Input.TextArea />
                     </Form.Item>
 
-                    {/* <Form.Item
-                        wrapperCol={{
-                            offset: 8,
-                            span: 16,
-                        }}
-                    >
-                        <Button type="primary" htmlType="submit">
-                            Submit
-                        </Button>
-                    </Form.Item> */}
+               
                 </Form>
             </Modal>
         </div>
     )
 }
 
-export default AddProductModal
+export default ModalAddProduct

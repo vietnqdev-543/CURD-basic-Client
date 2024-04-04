@@ -1,0 +1,8 @@
+import axios from 'axios'
+export const callFetchAllProduct = () => {
+    return axios.get('http://localhost:3003/product/fetchAllProduct')
+ }
+
+ export const callCreateProduct = (values) => {
+    return axios.post('http://localhost:3003/product/createProduct', values)
+ }

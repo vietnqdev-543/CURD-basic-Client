@@ -1,6 +1,9 @@
+import { useEffect } from "react"
+import { callFetchAllUser } from "../../services/userApi"
 
 
 const HomePage = () => {
+  
   return (
     <div>
       <h1>HomePage</h1>

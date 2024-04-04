@@ -1,8 +1,7 @@
 import { Button, Checkbox, Form, Input, message } from 'antd'; 
 import "./style.scss"
-import {callCreateUser} from '../../services/api'
+import { callCreateUser } from '../../services/userApi';
 import { useNavigate } from 'react-router-dom';
-import { useEffect } from 'react';
 
 
 const RegisterPage = () => {

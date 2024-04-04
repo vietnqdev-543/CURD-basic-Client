@@ -1,6 +1,6 @@
 import { Button, Checkbox, Form, Input, message } from 'antd'; 
 import "./style.scss"
-import {callCreateUser, callLoginUser} from '../../services/api'
+import { callLoginUser } from '../../services/userApi';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import {doLoginAction } from '../../redux/account/acccountSlice';
