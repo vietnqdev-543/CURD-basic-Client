@@ -6,3 +6,7 @@ export const callFetchAllProduct = () => {
  export const callCreateProduct = (values) => {
     return axios.post('http://localhost:3003/product/createProduct', values)
  }
+
+ export const callUpdateProduct = (values) => {
+   return axios.post('http://localhost:3003/product/updateProduct',values)
+ }

@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react"
 import { callFetchAllProduct , callCreateProduct } from "../../services/productApi"
 import { Button, Card, Col, Row, message } from "antd"
-import AddProductModal from "./AddProductModal/AddProductModal"
+
 const { Meta } = Card
 const ProductPage = () => {
   const [listProduct, setListProduct] = useState([])

@@ -1,9 +1,10 @@
 import React, { useState , useEffect } from 'react'
 import { Space, Table, Tag ,Button , message } from 'antd';
-import { callFetchAllProduct } from '../../../services/productApi'
+import { callFetchAllProduct, callUpdateProduct } from '../../../services/productApi'
 import { callCreateProduct } from '../../../services/productApi';
 import ModalAddProduct from './ModalAddProduct/ModalAddProduct'
 import * as XLSX from 'xlsx';
+import ModalUpdateProduct from './ModalUpdateProduct/ModalUpdateProduct';
 
 const AdminProduct = () => {
   const [allProduct , setAllProduct ] = useState([])
@@ -44,7 +45,7 @@ const AdminProduct = () => {
       key: 'action',
       render: (_, record) => (
         <Space size="middle">
-          <Button>Update </Button>
+          <Button onClick={showModalUpdate}>Update </Button>
           <Button>Delete</Button>
           <Button>View Detail</Button>
         </Space>
@@ -61,6 +62,7 @@ const AdminProduct = () => {
   }))
 
   const [listProduct, setListProduct] = useState([])
+
   const [isModalOpen, setIsModalOpen] = useState(false);
   const showModal = () => {
     setIsModalOpen(true);
@@ -69,7 +71,7 @@ const AdminProduct = () => {
     setIsModalOpen(false);
   };
   const handleSubmit = async (values) => {
-    const { name, brand, price, image, description } = values
+    const { name, brand, price, size , waterproof , sex , image, description } = values
     const res = await callCreateProduct(values)
     console.log('check', res)
     try {
@@ -89,9 +91,32 @@ const AdminProduct = () => {
     XLSX.writeFile(workbook, "TableAllProdct.xlsx");
   }
 
+  //update product
+  const [isModalUpdateOpen , setIsModalUpdateOpen] = useState(false)
+  const showModalUpdate = () => {
+    setIsModalOpen(true);
+  };
+  const handleCancelUpdate = () => {
+    setIsModalOpen(false);
+  };
+  const handleSubmitUpdate = async (values) => {
+    const {_id ,  name, brand, price,waterproof , sex , size , image, description } = values
+    const res = await callUpdateProduct(values)
+    console.log('check', res)
+    try {
+      message.success('Create product Succesfully')
+      setIsModalUpdateOpen(false)
+      window.location.reload();
+    } catch (error) {
+      message.error(error.message)
+      setIsModalOpen(false)
+    }
+  }
+
   return (
     <div>
       <ModalAddProduct isModalOpen={isModalOpen} handleCancel={handleCancel} handleSubmit={handleSubmit}/>
+      <ModalUpdateProduct isModalUpdateOpen={isModalUpdateOpen} handleCancelUpdate={handleCancelUpdate} handleSubmitUpdate={handleSubmitUpdate}/>
      <div style={{paddingBottom:'10px', }}>
      <Button style={{marginRight:'10px', }} onClick={showModal}>Add Product</Button>
      <Button  onClick={handleExportExcel}>Export Excel</Button>

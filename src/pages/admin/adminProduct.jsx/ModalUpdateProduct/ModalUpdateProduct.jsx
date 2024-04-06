@@ -1,15 +1,15 @@
 import React from 'react'
 import { Modal, Form, Input, Checkbox, Button, Select , Row , Col } from 'antd'
 
-const ModalAddProduct = (props) => {
-    const { isModalOpen, handleCancel, handleSubmit } = props
+const ModalUpdateProduct = (props) => {
+    const { isModalUpdateOpen, handleCancelUpdate, handleSubmitUpdate } = props
     const [form] = Form.useForm()
     return (
         <div>
-            <Modal title="Add Product" open={isModalOpen} onOk={form.submit} onCancel={handleCancel}>
+            <Modal title="Add Product" open={isModalUpdateOpen} onOk={form.submit} onCancel={handleCancelUpdate}>
                 <Form
                     form={form}
-                    onFinish={handleSubmit}
+                    onFinish={handleSubmitUpdate}
                     name="basic"
                     labelCol={{
                         span: 24,
@@ -206,4 +206,4 @@ const ModalAddProduct = (props) => {
     )
 }
 
-export default ModalAddProduct
+export default ModalUpdateProduct
