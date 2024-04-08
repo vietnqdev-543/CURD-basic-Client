@@ -1,15 +1,16 @@
 import React from 'react'
-import { Modal, Form, Input, Checkbox, Button, Select , Row , Col } from 'antd'
+import { Modal, Form, Input, Checkbox, Button, Select, Row, Col ,InputNumber } from 'antd'
 
 const ModalUpdateProduct = (props) => {
-    const { isModalUpdateOpen, handleCancelUpdate, handleSubmitUpdate } = props
+    const { isModalOpenUpdateProduct, setIsModalOpenUpdateProduct, handleSubmitUpdateProduct, dataProductUpdate, handleCancel } = props
     const [form] = Form.useForm()
+
     return (
         <div>
-            <Modal title="Add Product" open={isModalUpdateOpen} onOk={form.submit} onCancel={handleCancelUpdate}>
+            <Modal title="Add Product" open={isModalOpenUpdateProduct} onOk={form.submit} onCancel={handleCancel}>
                 <Form
                     form={form}
-                    onFinish={handleSubmitUpdate}
+                    onFinish={handleSubmitUpdateProduct}
                     name="basic"
                     labelCol={{
                         span: 24,
@@ -25,145 +26,229 @@ const ModalUpdateProduct = (props) => {
                     }}
                     autoComplete="off"
                 >
-                    <Row gutter={15}></Row>
-                   <Col span={24}>
-                   <Form.Item
-                        label="Name product"
-                        name="name"
-                        rules={[
-                            {
-                                required: true,
-                                message: 'Please input your name product!',
-                            },
-                        ]}
-                    >
-                        <Input />
-                    </Form.Item>
-                   </Col>
-                 
-
-                   <Row gutter={15}>
-                   <Col span={8}>
-                    <Form.Item
-                        label="Brand"
-                        name="brand"
-                        rules={[
-                            {
-                                required: true,
-                                message: 'Please input your brand!',
-                            },
-                        ]}
-                    >
-                           <Select
-                        defaultValue=""
-                      
-
-                        options={[
-                            {
-                                value: 'Seiko',
-                                label: 'Seiko',
-                            },
-                            {
-                                value: 'Casio',
-                                label: 'Casio',
-                            },
-                            {
-                                value: 'Citizen',
-                                label: 'Citizen',
-                            },
-                            {
-                                value: 'Saga',
-                                label: 'Saga',
-                            },
-                            {
-                                value: 'Sokolov',
-                                label: 'Sokolov',
-                            },
-                        ]}
-                    />
-                    </Form.Item>
+                        <Col span={24}>
+                        <Form.Item
+                            label="ID Product"
+                            name="_id"
+                            style={{display:'none'}}
+                            initialValue={dataProductUpdate._id}
+                            rules={[
+                                {
+                                    required: true,
+                                    message: 'Please input your name id!',
+                                },
+                            ]}
+                        >
+                            <Input  />
+                        </Form.Item>
                     </Col>
-                   <Col span={8}>
-                   <Form.Item
-                        label="Sex"
-                        name="sex"
-                        rules={[
-                            {
-                                required: true,
-                                message: 'Please input your sex!',
-                            },
-                        ]}
-                    >
-                           <Select
-                        defaultValue=""
-                   
-
-                        options={[
-                            {
-                                value: 'unisex',
-                                label: 'Unisex',
-                            },
-                            {
-                                value: 'men',
-                                label: 'men',
-                            },
-                            {
-                                value: 'women',
-                                label: 'women',
-                            },
-                        ]}
-                    />
-                    </Form.Item>
-                   </Col>
-                    <Col span={8}>
-                    <Form.Item
-                        label="WaterProof"
-                        name="waterproof"
-                        rules={[
-                            {
-                                required: true,
-                                message: 'Please input your waterproof!',
-                            },
-                        ]}
-                    >
-                           <Select
-                        defaultValue=""
-                       
-
-                        options={[
-                            {
-                                value: 'none',
-                                label: 'none',
-                            },
-                            {
-                                value: '10mm',
-                                label: '10mm',
-                            },
-                            {
-                                value: '30mm',
-                                label: '30mm',
-                            },
-                            {
-                                value: '50mm',
-                                label: '50mm',
-                            },
-                            {
-                                value: '100mm',
-                                label: '100mm',
-                            },
-                            {
-                                value: '200mm',
-                                label: '200mm',
-                            },
-                        ]}
-                    />
-                    </Form.Item>
+                    <Col span={24}>
+                        <Form.Item
+                            label="Name product"
+                            name="name"
+                            initialValue={dataProductUpdate.name}
+                            rules={[
+                                {
+                                    required: true,
+                                    message: 'Please input your name product!',
+                                },
+                            ]}
+                        >
+                            <Input />
+                        </Form.Item>
                     </Col>
-                   </Row>
+
+
+                    <Row gutter={15}>
+                        <Col span={6}>
+                            <Form.Item
+                                label="Brand"
+                                name="brand"
+                                initialValue={dataProductUpdate.brand}
+                                rules={[
+                                    {
+                                        required: true,
+                                        message: 'Please input your brand!',
+                                    },
+                                ]}
+                            >
+                                <Select
+                                    options={[
+                                        {
+                                            value: 'Seiko',
+                                            label: 'Seiko',
+                                        },
+                                        {
+                                            value: 'Casio',
+                                            label: 'Casio',
+                                        },
+                                        {
+                                            value: 'Citizen',
+                                            label: 'Citizen',
+                                        },
+                                        {
+                                            value: 'Saga',
+                                            label: 'Saga',
+                                        },
+                                        {
+                                            value: 'Sokolov',
+                                            label: 'Sokolov',
+                                        },
+                                    ]}
+                                />
+                            </Form.Item>
+                        </Col>
+                        <Col span={6}>
+                            <Form.Item
+                                label="Sex"
+                                name="sex"
+                                initialValue={dataProductUpdate.sex}
+                                rules={[
+                                    {
+                                        required: true,
+                                        message: 'Please input your sex!',
+                                    },
+                                ]}
+                            >
+                                <Select
+                                    options={[
+                                        {
+                                            value: 'unisex',
+                                            label: 'Unisex',
+                                        },
+                                        {
+                                            value: 'men',
+                                            label: 'men',
+                                        },
+                                        {
+                                            value: 'women',
+                                            label: 'women',
+                                        },
+                                    ]}
+                                />
+                            </Form.Item>
+                        </Col>
+                        <Col span={6}>
+                            <Form.Item
+                                label="Size"
+                                name="size"
+                                initialValue={dataProductUpdate.size}
+                                rules={[
+                                    {
+                                        required: true,
+                                        message: 'Please input your size!',
+                                    },
+                                ]}
+                            >
+                                <Select
+                                    options={[
+                                        {
+                                            value: '24mm',
+                                            label: '24mm',
+                                        },
+                                        {
+                                            value: '26mm',
+                                            label: '26mm',
+                                        },
+                                        {
+                                            value: '32mm',
+                                            label: '32mm',
+                                        },
+                                        {
+                                            value: '36mm',
+                                            label: '36mm',
+                                        },
+                                        {
+                                            value: '40mm',
+                                            label: '40mm',
+                                        },
+                                        {
+                                            value: '44mm',
+                                            label: '44mm',
+                                        },
+                                        {
+                                            value: '46mm',
+                                            label: '46mm',
+                                        },
+                                        {
+                                            value: '52mm',
+                                            label: '52mm',
+                                        },
+                                        {
+                                            value: '56mm',
+                                            label: '56mm',
+                                        },
+                                    ]}
+                                />
+                            </Form.Item>
+                        </Col>
+
+                        <Col span={6}>
+                            <Form.Item
+                                label="WaterProof"
+                                name="waterproof"
+                                initialValue={dataProductUpdate.waterproof}
+                                rules={[
+                                    {
+                                        required: true,
+                                        message: 'Please input your waterproof!',
+                                    },
+                                ]}
+                            >
+                                <Select
+                                    options={[
+                                        {
+                                            value: true,
+                                            label: 'Có',
+                                        },
+                                        {
+                                            value: false ,
+                                            label : 'Không'
+                                        }
+                                    ]}
+                                />
+                            </Form.Item>
+                        </Col>
+                    </Row>
+
+                    <Row gutter={15}>
+                        <Col span={12}>
+                        <Form.Item
+                        label="Quantity"
+                        name="quantity"
+                        initialValue={dataProductUpdate.quantity}
+                        
+                        rules={[
+                            {
+                                required: true,
+                                message: 'Please input your quantity',
+                            },
+                        ]}
+                    >
+                        <InputNumber min={0}  style={{width:'100%'}} />
+                    </Form.Item>
+                        </Col>
+                        <Col span={12}>
+                        <Form.Item
+                        label="Sold"
+                        name="sold"
+                        initialValue={dataProductUpdate.sold}
+                        rules={[
+                            {
+                                required: true,
+                                message: 'Please input your sold',
+                            },
+                        ]}
+                    >
+                        <InputNumber min={0}  style={{ width: '100%' }} />
+                    </Form.Item>
+                        </Col>
+                    </Row>
 
                     <Form.Item
                         label="Price"
                         name="price"
+                        initialValue={dataProductUpdate.price}
                         rules={[
                             {
                                 required: true,
@@ -176,6 +261,7 @@ const ModalUpdateProduct = (props) => {
                     <Form.Item
                         label="Image"
                         name="image"
+                        initialValue={dataProductUpdate.image}
                         rules={[
                             {
                                 required: true,
@@ -189,6 +275,7 @@ const ModalUpdateProduct = (props) => {
                     <Form.Item
                         label="Description"
                         name="description"
+                        initialValue={dataProductUpdate.description}
                         rules={[
                             {
                                 required: true,

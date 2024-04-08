@@ -10,3 +10,7 @@ export const callFetchAllProduct = () => {
  export const callUpdateProduct = (values) => {
    return axios.post('http://localhost:3003/product/updateProduct',values)
  }
+
+ export const callDeleteProduct =(_id) => {
+   return axios.post(`http://localhost:3003/product/deleteProduct/${_id}` ,)
+ }

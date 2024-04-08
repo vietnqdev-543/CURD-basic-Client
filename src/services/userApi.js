@@ -15,3 +15,6 @@ export const callUpdateUser = (values) => {
 export const callFetchAllUser = () => {
     return axios.get('http://localhost:3003/user/fetchAllUser')
 }
+export const callDeleteUser = (_id) => {
+  return axios.post(`http://localhost:3003/user/deleteUser/${_id}`)
+}

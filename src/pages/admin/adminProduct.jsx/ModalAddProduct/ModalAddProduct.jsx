@@ -1,15 +1,18 @@
 import React from 'react'
-import { Modal, Form, Input, Checkbox, Button, Select , Row , Col } from 'antd'
+import { Modal, Form, Input, Checkbox, Button, Select , Row , Col, InputNumber } from 'antd'
 
 const ModalAddProduct = (props) => {
-    const { isModalOpen, handleCancel, handleSubmit } = props
+    const { isModalOpenAddProduct , setIsModalOpenAddProduct , handleSubmitAddProduct } = props
+    const handleCancel = () => {
+        setIsModalOpenAddProduct(false);
+      };
     const [form] = Form.useForm()
     return (
         <div>
-            <Modal title="Add Product" open={isModalOpen} onOk={form.submit} onCancel={handleCancel}>
+            <Modal title="Create product" open={isModalOpenAddProduct} onOk={form.submit} onCancel={handleCancel}>
                 <Form
                     form={form}
-                    onFinish={handleSubmit}
+                    onFinish={handleSubmitAddProduct}
                     name="basic"
                     labelCol={{
                         span: 24,
@@ -25,7 +28,7 @@ const ModalAddProduct = (props) => {
                     }}
                     autoComplete="off"
                 >
-                    <Row gutter={15}></Row>
+               
                    <Col span={24}>
                    <Form.Item
                         label="Name product"
@@ -43,7 +46,7 @@ const ModalAddProduct = (props) => {
                  
 
                    <Row gutter={15}>
-                   <Col span={8}>
+                   <Col span={6}>
                     <Form.Item
                         label="Brand"
                         name="brand"
@@ -83,7 +86,7 @@ const ModalAddProduct = (props) => {
                     />
                     </Form.Item>
                     </Col>
-                   <Col span={8}>
+                   <Col span={6}>
                    <Form.Item
                         label="Sex"
                         name="sex"
@@ -104,18 +107,75 @@ const ModalAddProduct = (props) => {
                                 label: 'Unisex',
                             },
                             {
-                                value: 'men',
-                                label: 'men',
+                                value: 'nam',
+                                label: 'Nam',
                             },
                             {
-                                value: 'women',
-                                label: 'women',
+                                value: 'nữ',
+                                label: 'Nữ',
                             },
                         ]}
                     />
                     </Form.Item>
                    </Col>
-                    <Col span={8}>
+                    <Col span={6}>
+                    <Form.Item
+                        label="Size"
+                        name="size"
+                        rules={[
+                            {
+                                required: true,
+                                message: 'Please input your size!',
+                            },
+                        ]}
+                    >
+                           <Select
+                        defaultValue=""
+                       
+
+                        options={[
+                            {
+                                value: '24mm',
+                                label: '24mm',
+                            },
+                            {
+                                value: '26mm',
+                                label: '26mm',
+                            },
+                            {
+                                value: '32mm',
+                                label: '32mm',
+                            },
+                            {
+                                value: '36mm',
+                                label: '36mm',
+                            },
+                            {
+                                value: '40mm',
+                                label: '40mm',
+                            },
+                            {
+                                value: '44mm',
+                                label: '44mm',
+                            },
+                            {
+                                value: '46mm',
+                                label: '46mm',
+                            },
+                            {
+                                value: '52mm',
+                                label: '52mm',
+                            },
+                            {
+                                value: '56mm',
+                                label: '56mm',
+                            },
+                        ]}
+                    />
+                    </Form.Item>
+                    </Col>
+
+                    <Col span={6}>
                     <Form.Item
                         label="WaterProof"
                         name="waterproof"
@@ -127,33 +187,17 @@ const ModalAddProduct = (props) => {
                         ]}
                     >
                            <Select
-                        defaultValue=""
+                        defaultValue=''
                        
 
                         options={[
                             {
-                                value: 'none',
-                                label: 'none',
+                                value: true,
+                                label: 'Có',
                             },
                             {
-                                value: '10mm',
-                                label: '10mm',
-                            },
-                            {
-                                value: '30mm',
-                                label: '30mm',
-                            },
-                            {
-                                value: '50mm',
-                                label: '50mm',
-                            },
-                            {
-                                value: '100mm',
-                                label: '100mm',
-                            },
-                            {
-                                value: '200mm',
-                                label: '200mm',
+                                value: false,
+                                label: 'Không',
                             },
                         ]}
                     />
@@ -161,30 +205,68 @@ const ModalAddProduct = (props) => {
                     </Col>
                    </Row>
 
+                    <Row gutter={15}>
+                        <Col span={12}>
+                        <Form.Item
+                        label="Quantity"
+                        name="quantity"
+                        initialValue={0}
+                        
+                        rules={[
+                            {
+                                required: true,
+                                message: 'Please input your quantity',
+                            },
+                        ]}
+                    >
+                        <InputNumber min={0}  style={{width:'100%'}} />
+                    </Form.Item>
+                        </Col>
+                        <Col span={12}>
+                        <Form.Item
+                        label="Sold"
+                        name="sold"
+                        initialValue={0}
+                        rules={[
+                            {
+                                required: true,
+                                message: 'Please input your sold',
+                            },
+                        ]}
+                    >
+                        <InputNumber min={0}  style={{ width: '100%' }} />
+                    </Form.Item>
+                        </Col>
+                    </Row>
+                    <Col span={24}>
                     <Form.Item
                         label="Price"
                         name="price"
                         rules={[
                             {
                                 required: true,
-                                message: 'Please input your price!',
+                                message: 'Please input your name price!',
                             },
                         ]}
                     >
-                        <Input />
+                        <InputNumber style={{width:'100%'}} min={0}   
+                        
+                        />
                     </Form.Item>
+                    </Col>
                     <Form.Item
                         label="Image"
                         name="image"
                         rules={[
                             {
                                 required: true,
-                                message: 'Please input your price!',
+                                message: 'Please input your image!',
                             },
                         ]}
                     >
                         <Input />
                     </Form.Item>
+               
 
                     <Form.Item
                         label="Description"
