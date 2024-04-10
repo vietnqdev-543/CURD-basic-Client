@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react'
 import { Space, Table, Tag, Button, message, Popconfirm } from 'antd';
-import { callDeleteProduct, callFetchAllProduct, callUpdateProduct } from '../../../services/productApi'
+import { callDeleteProduct, callFetchAllProduct, callHandleUploadFile, callUpdateProduct } from '../../../services/productApi'
 import { callCreateProduct } from '../../../services/productApi';
 import ModalAddProduct from './ModalAddProduct/ModalAddProduct'
 import * as XLSX from 'xlsx';
 import ModalUpdateProduct from './ModalUpdateProduct/ModalUpdateProduct';
 import DrawerViewDetailProduct from './DrawerViewDetailProduct/DrawerViewDetailProduct';
-
+import { callFetchAllCategory } from '../../../services/categoryApi';
 const AdminProduct = () => {
   const [allProduct, setAllProduct] = useState([])
   useEffect(() => {
@@ -73,7 +73,7 @@ const AdminProduct = () => {
     setIsModalOpenAddProduct(true);
   };
   const handleSubmitAddProduct = async (values) => {
-    const { name, brand, price, size, waterproof, quantity, sold, sex, image, description } = values
+    const { name, brand, price, size, waterproof, quantity, sold, sex, image, description , slider} = values
     const res = await callCreateProduct(values)
     console.log('check', res)
     try {
@@ -92,7 +92,7 @@ const AdminProduct = () => {
   const [dataProductUpdate, setDataProductUpdate] = useState([])
   const [isModalOpenUpdateProduct, setIsModalOpenUpateProduct] = useState(false)
   const handleSubmitUpdateProduct = async (values) => {
-    const { _id, name, brand, sex, waterproof, size, price, quantity, sold, description, image } = values
+    const { _id, name, brand, sex, waterproof, size, price, quantity, sold, description, image , slider} = values
     console.log('values ', values)
     const res = await callUpdateProduct(values)
     console.log('res', res)
@@ -144,10 +144,29 @@ const AdminProduct = () => {
   }
   //---end---
 
+  //fetch list category
+  useEffect(()=>{
+    fetchAllCategory()
+},[])
+const [listCategory , setListCategory] = useState([])
+const fetchAllCategory = async() => {
+    const res = await callFetchAllCategory()
+    if(res){
+        console.log('list category' ,res.data.data)
+        setListCategory(res.data.data)
+    }else{
+        console.log(error)
+    }
+}
+//handle Upload file
+  const handleUploadFile = async() => {
+    const res = await callHandleUploadFile()
+  }
+
   return (
     <div>
-      <ModalAddProduct isModalOpenAddProduct={isModalOpenAddProduct} setIsModalOpenAddProduct={setIsModalOpenAddProduct} handleSubmitAddProduct={handleSubmitAddProduct} />
-      <ModalUpdateProduct isModalOpenUpdateProduct={isModalOpenUpdateProduct} setIsModalOpenUpateProduct={setIsModalOpenUpateProduct} handleSubmitUpdateProduct={handleSubmitUpdateProduct} dataProductUpdate={dataProductUpdate} handleCancel={handleCancel} />
+      <ModalAddProduct isModalOpenAddProduct={isModalOpenAddProduct} setIsModalOpenAddProduct={setIsModalOpenAddProduct} handleSubmitAddProduct={handleSubmitAddProduct} listCategory={listCategory} />
+      <ModalUpdateProduct isModalOpenUpdateProduct={isModalOpenUpdateProduct} setIsModalOpenUpateProduct={setIsModalOpenUpateProduct} handleSubmitUpdateProduct={handleSubmitUpdateProduct} dataProductUpdate={dataProductUpdate} handleCancel={handleCancel} listCategory={listCategory} />
       <DrawerViewDetailProduct dataProductViewDetail={dataProductViewDetail} setDataProductViewDetail={setDataProductViewDetail} setOpenDrawerViewDetail={setOpenDrawerViewDetail} openDrawerViewDetail={openDrawerViewDetail}
       />
       <div style={{ paddingBottom: '10px', }}>

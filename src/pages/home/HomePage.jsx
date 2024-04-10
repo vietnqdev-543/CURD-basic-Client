@@ -1,13 +1,65 @@
-import { useEffect } from "react"
-import { callFetchAllUser } from "../../services/userApi"
-
-
+import SliderComponent from '../../components/sliderComponent/SliderComponent';
+import './style.scss'
+import banner2 from './banner2.jpg'
+import banner1 from './banner1.jpg'
+import { callFetchAllProduct } from '../../services/productApi';
+import { useEffect } from 'react';
+import {Row , Col} from 'antd'
 const HomePage = () => {
-  
+  useEffect(()=>{
+    listProduct()
+  },[])
+  const arrImage = [
+    'https://images.pexels.com/photos/20804798/pexels-photo-20804798/free-photo-of-thanh-ph-ngh-thu-t-m-c-toa-nha.jpeg?auto=compress&cs=tinysrgb&w=800&lazy=load' ,
+    'https://media.istockphoto.com/id/1383796215/photo/silhouette-of-man-holding-binoculars-on-mountain-peak-against-bright-sunlight-sky-background.jpg?b=1&s=612x612&w=0&k=20&c=7qil3OYFwP814_tFl1b-nPHloTptreuOeWA0HOLE5pE=' ,
+    'https://media.istockphoto.com/id/1446043855/photo/black-woman-on-road-enjoying-window-view-of-desert-and-traveling-in-jeep-on-holiday-road-trip.jpg?b=1&s=612x612&w=0&k=20&c=_7aLPcUUN1sMMmIUpPPI4BshWkwn5MQuI9FFEHswy34='
+  ]
+  const listProduct = async() => {
+    const res = await callFetchAllProduct()
+    console.log('list product' ,res.data)
+  }
   return (
-    <div>
-      <h1>HomePage</h1>
-      <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Aperiam ducimus quas, sapiente expedita commodi iure, culpa maxime similique vel ex reiciendis fuga consequatur repellendus velit quia eveniet deserunt? Beatae quia facere sunt ut esse voluptatem adipisci dolore perferendis? Ea distinctio sapiente placeat! Unde aliquid blanditiis aperiam. Hic quo saepe maxime deleniti laborum nihil assumenda illo quis molestias, iure porro perferendis soluta reprehenderit officia provident omnis esse odit voluptatibus id dolores? Laborum neque excepturi commodi nulla iste eaque sunt ipsum harum. Ipsam adipisci odio, ratione quod similique ex distinctio at autem veritatis est aperiam quidem, iste cupiditate repellendus eum mollitia provident ipsum velit. Vel cupiditate mollitia hic suscipit ex consequuntur fugiat amet nesciunt, numquam necessitatibus! Ullam nam quae odit. Maxime quae maiores iusto repellat illum laboriosam, ipsam animi autem eum error velit minus esse beatae asperiores vitae aut quos! Illo fuga sequi, consequuntur debitis repellat libero ab, distinctio ducimus totam similique quia porro atque placeat aliquid qui quidem quo sed hic praesentium quam nam? Ipsum earum itaque maiores veritatis accusamus aspernatur ad, ex eaque voluptas quam saepe accusantium recusandae quod adipisci nobis quisquam porro sapiente? Necessitatibus molestiae, iste magni cum voluptatibus et, enim illo, sit ratione iusto voluptas nisi maiores neque?</p>
+    <div className='home-container'>
+      <div className="c1">
+        {/* <SliderComponent arrImg={arrImage}/> */}
+          <img src={banner2} className='img' alt="" />
+      </div>
+      <div className="c2">
+        <div className='item item1'>
+          <div className='name'>Sản phẩm mới</div>
+        </div>
+        <div className='item item2'>
+          <div className='name'>Nam</div>
+        </div>
+        <div className='item item3'>
+          <div className='name'>Nữ</div>
+        </div>
+        <div className='item item4'>
+          <div className='name'>Cặp đôi</div>
+        </div>
+      </div>
+      <div className="c1">    
+          <img src={banner1} className='img' alt="" />
+      </div>
+
+      <div className="c4">
+          <Row gutter={15}>
+            <Col className='c4-item' span={6}>
+              <div>1</div>
+            </Col>
+            <Col className='c4-item' span={6}>
+              <div>2</div>
+            </Col>
+            <Col className='c4-item' span={6}>
+              <div>3</div>
+            </Col>
+            <Col className='c4-item' span={6}>
+              <div>4</div>
+            </Col>
+          </Row>
+        </div>
+
+      
     </div>
   )
 }

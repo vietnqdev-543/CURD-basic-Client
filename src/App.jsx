@@ -18,6 +18,8 @@ import ProtectedRoute from './components/protectedRoute/ProtectedRoute';
 import AdminUser from './pages/admin/adminUser/AdminUser';
 import AdminCategory from './pages/admin/adminCategory/AdminCategory' ;
 import AdminOrder from './pages/admin/adminOrder/AdminOrder'
+import ProductDetail from './pages/product/ProductDetail/ProductDetail';
+import Blog from './pages/blogPage/Blog';
 
 
 function App() {
@@ -42,7 +44,9 @@ function App() {
         {index: true , element : <HomePage />} ,
         {path : '/product' , element : <ProductPage />},
         {path : '/login' , element :<LoginPage />},
-        {path : '/register' , element : <RegisterPage />}
+        {path : '/register' , element : <RegisterPage />} ,
+        {path : `product/:slug` ,element: <ProductDetail />} ,
+        {path : '/blog' , element : <Blog />}
       ]
       
     },
@@ -58,6 +62,7 @@ function App() {
         {path :'product' , element: <AdminProduct />},
         {path :'category' , element: <AdminCategory />},
         {path :'order' , element: <AdminOrder />},
+    
 
       ]
     }

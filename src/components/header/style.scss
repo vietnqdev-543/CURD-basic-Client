@@ -1,14 +1,64 @@
 .header-container{
     width: 100%;
-    height: 80px;
-    background-color: black;
     color: white;
-    display: flex;
-    justify-content: space-between ;
-    align-items: center;
     margin-bottom: 20px;
-    padding: 0 40px;
-    .nav{
+
+    .header-top{
+        width: 100%;
+        color: black;
+        background: white;
+        text-align: center;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 25px 40px;
+        .nameBrand{
+            font-size: 35px;
+            font-weight: bolder;
+            // text-transform: uppercase;
+            margin-left: 150px;
+        }
+        .cart{
+            a{
+                color: black;
+                text-decoration: none;
+                font-size: 20px;
+                padding: 0 10px;
+            }
+            a:hover{
+                color: red;
+            }
+            .userName{
+                flex-direction: row;
+                align-items: center;
+                display: flex;
+                justify-content: center;
+                cursor: pointer;
+                .name{
+                    text-transform: uppercase;
+                    color: black ;
+                    padding: 0 10px;
+                }
+            }
+        }
+    }
+    .header-nav{
+        width: 100%;
+        background-color: white;
+        border-top: 1px solid black;
+        border-bottom: 1px solid black;
+        padding: 20px 0px;
+        text-align: center;
+        a{
+            text-decoration: none;
+            color: black;
+            padding: 0 15px;
+            font-size: 20px;
+        }
+        a:hover{
+            color: darkred;
+            text-decoration: underline;
+        }
         .logo{
             font-size: 30px;
             color: white;
@@ -23,29 +73,6 @@
             font-size: 20px;
             text-transform: uppercase;
             padding: 0 10px;
-        }
-    }
-    .nav2{
-        a{
-            color: white;
-            text-decoration: none;
-            font-size: 20px;
-            padding: 0 10px;
-        }
-        a:hover{
-            color: red;
-        }
-        .userName{
-            flex-direction: row;
-            align-items: center;
-            display: flex;
-            justify-content: center;
-            cursor: pointer;
-            .name{
-                text-transform: uppercase;
-                color: white ;
-                padding: 0 10px;
-            }
         }
     }
 }

@@ -1,9 +1,11 @@
 import { useEffect, useState } from "react"
-import { callFetchAllProduct , callCreateProduct } from "../../services/productApi"
-import { Button, Card, Col, Row, message } from "antd"
-
+import { callFetchAllProduct } from "../../services/productApi"
+import {  Card, Col, Row} from "antd"
+import { useNavigate } from 'react-router-dom'
+import ProductDetail from "./ProductDetail/ProductDetail"
 const { Meta } = Card
 const ProductPage = () => {
+  const navigate = useNavigate()
   const [listProduct, setListProduct] = useState([])
   useEffect(() => {
     handleFetchAccount()
@@ -12,22 +14,35 @@ const ProductPage = () => {
   const handleFetchAccount = async () => {
     try {
       const res = await callFetchAllProduct()
-      console.log(res.data) // Make sure this logs the expected data structure
-      setListProduct(res.data) // Assuming res.data contains the array of products
+      if(res.data){
+        console.log(res.data)
+        setListProduct(res.data)
+      }else{
+        console.log('có lỗi xảy ra')
+      }
     } catch (error) {
       console.error("Error fetching products:", error)
     }
   }
 
+  const [dataSlug, setDataSlug] = useState({})
+  const handleNavigateProductDetail = (productId) => {
+    const slug = productId
+    console.log(slug)
+    setDataSlug(slug)
+    navigate(`${slug}`)
+  }
 
   return (
     <div>
+      <div style={{ display: 'none' }}>
+      </div>
       <div style={{ padding: '30px 0px', display: 'flex', alignItems: 'center', gap: '20px' }}>
         <h1>Product Page</h1>
       </div>
       <Row gutter={{ xs: 8, sm: 16, md: 24, lg: 32 }}>
         {listProduct.map((item, index) => (
-          <Col span={4}  key={index} onClick={() => { console.log(123) }} >
+          <Col className="clickme" span={4} key={index} onClick={() => { handleNavigateProductDetail(item._id) }} >
             <Card
               hoverable
               style={{
@@ -35,9 +50,9 @@ const ProductPage = () => {
               }}
               cover={<img alt="example" src={item.image} />}
             >
-              <Meta title={item.name}  />
+              <Meta title={item.name} />
               {item.price ?
-                <div style={{ fontSize: '25px', fontWeight: 'bold' , color:'darkred' }}>
+                <div style={{ fontSize: '25px', fontWeight: 'bold', color: 'darkred' }}>
                   {`${item.price.toLocaleString('vi-VN', {
                     style: 'currency',
                     currency: 'VND',
@@ -50,7 +65,7 @@ const ProductPage = () => {
           </Col>
         ))}
       </Row>
-    
+
     </div>
   )
 }

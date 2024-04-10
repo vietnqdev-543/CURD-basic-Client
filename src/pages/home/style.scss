@@ -1,0 +1,80 @@
+.home-container {
+  width: 100%;
+  min-height: 100vh;
+
+  .c1 {
+    max-width: 100%;
+    height: auto;
+
+    .img {
+      width: 100%;
+    }
+  }
+
+  .c2 {
+    width: 100%;
+    display: grid;
+    padding: 20px 12%;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: repeat(2, 300px);
+    grid-gap: 10px;
+    grid-template-areas: 'aa aa bb cc '
+      ' aa aa dd dd';
+      .item {
+        border-radius: 10px;
+        color: white;
+    
+        .name {
+          height: 100%;
+          width: 100%;
+          display: flex;
+          padding: 10px;
+          align-items: flex-end;
+          font-size: 20px;
+          font-weight: bold;
+    
+        }
+    
+      }
+    
+      .item1 {
+        grid-area: aa;
+        background-image: url('https://donghomytan.vn/wp-content/uploads/2019/10/banner-sp-moi.png');
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: center;
+      }
+    
+      .item2 {
+        grid-area: bb;
+        background-image: url('https://trevang.vn/wp-content/uploads/2015/07/dong-ho-nam-cach-mua-di-tiec.jpg');
+        background-size: cover;
+      }
+    
+      .item3 {
+        grid-area: cc;
+        background-image: url('https://laodongthudo.vn/stores/news_dataimages/khanhly/082016/11/10/5706_dong-ho-michael.jpg');
+        background-size: cover;
+      }
+    
+      .item4 {
+        grid-area: dd;
+        background-image: url('https://cdn.tgdd.vn/Files/2019/07/13/1179294/660x380_12-20170520143329.jpg');
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: center;
+      }
+  }
+
+  .c4 {
+    display: grid;
+    width: 100%;
+    grid-template-columns: repeat(4, 100%);
+    grid-template-rows: repeat(1 , 400px);
+    grid-row-gap: 25px;
+
+    .c4-item {
+      border: 1px solid black;
+    }
+  }
+}

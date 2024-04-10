@@ -60,13 +60,10 @@ const Header = () => {
     <div>
       <UpdateUser isModalOpen={isModalOpen} setIsModalOpen={setIsModalOpen} />
       <div className="header-container">
-      <div className='nav'>
-        <a className='logo' href="/">HyperWatch</a>
-        <a className='link' href="/product">Product</a>
-        <a className='link' href="#">about</a>
-      </div>
-
-      <div className="nav2">
+        <div className="header-top">
+          <div></div>
+          <div className='nameBrand'>HorizonHours</div>
+          <div className="cart">
         {isLogin ?
           <Dropdown
             menu={{
@@ -93,11 +90,15 @@ const Header = () => {
           </div>
 
         }
-      </div>
-
-
-
-
+        </div>
+        </div>
+        <div className="header-nav">
+          <a href="/">Home</a>
+          <a href="/product">Product</a>
+          <a href="/blog">Blog</a>
+          <a href="#">Contact</a>
+          <a href="#">About</a>
+        </div>
     </div>
     </div>
 

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Button, Drawer, Descriptions } from 'antd';
+import { Button, Drawer, Descriptions , Image} from 'antd';
 import moment from 'moment'
 const DrawerViewDetailProduct = ({ setOpenDrawerViewDetail, openDrawerViewDetail, dataProductViewDetail, setDataProductViewDetail }) => {
 
@@ -29,6 +29,20 @@ const DrawerViewDetailProduct = ({ setOpenDrawerViewDetail, openDrawerViewDetail
           <Descriptions.Item label="Ngày cập nhật">
             {moment(dataProductViewDetail?.updatedAt).format('HH:mm:ss DD-MM-YYYY')}
           </Descriptions.Item>
+          <Descriptions.Item label="Ảnh đại diện">
+            <Image
+              width={200}
+              src={dataProductViewDetail.image}
+            />
+          </Descriptions.Item>
+          <Descriptions.Item label="Ảnh slider">
+            <Image
+              width={200}
+              src={dataProductViewDetail?.slider}
+            />
+
+          </Descriptions.Item>
+          
         </Descriptions>
       </Drawer>
     </div>

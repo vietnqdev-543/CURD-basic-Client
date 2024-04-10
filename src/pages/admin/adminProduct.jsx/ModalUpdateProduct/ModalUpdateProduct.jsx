@@ -2,7 +2,7 @@ import React from 'react'
 import { Modal, Form, Input, Checkbox, Button, Select, Row, Col ,InputNumber } from 'antd'
 
 const ModalUpdateProduct = (props) => {
-    const { isModalOpenUpdateProduct, setIsModalOpenUpdateProduct, handleSubmitUpdateProduct, dataProductUpdate, handleCancel } = props
+    const { isModalOpenUpdateProduct, setIsModalOpenUpdateProduct, handleSubmitUpdateProduct, dataProductUpdate, handleCancel , listCategory} = props
     const [form] = Form.useForm()
 
     return (
@@ -74,26 +74,9 @@ const ModalUpdateProduct = (props) => {
                             >
                                 <Select
                                     options={[
-                                        {
-                                            value: 'Seiko',
-                                            label: 'Seiko',
-                                        },
-                                        {
-                                            value: 'Casio',
-                                            label: 'Casio',
-                                        },
-                                        {
-                                            value: 'Citizen',
-                                            label: 'Citizen',
-                                        },
-                                        {
-                                            value: 'Saga',
-                                            label: 'Saga',
-                                        },
-                                        {
-                                            value: 'Sokolov',
-                                            label: 'Sokolov',
-                                        },
+                                        ...listCategory.map((item)=>{
+                                            return {value : item.brand ,label : item.brand }
+                                        })
                                     ]}
                                 />
                             </Form.Item>
