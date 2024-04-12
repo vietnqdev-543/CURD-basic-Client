@@ -11,13 +11,12 @@ const UpdateUser = ({isModalOpen , setIsModalOpen}) => {
         {
           key: '1',
           label: 'Cập nhật thông tin',
-          children: <UpdateInfo setIsModalOpen={setIsModalOpen
-          } />,
+          children: <UpdateInfo setIsModalOpen={setIsModalOpen} />,
         },
         {
           key: '2',
           label: 'Đổi mật khẩu',
-          children: <UpdatePassword />,
+          children: <UpdatePassword setIsModalOpen={setIsModalOpen} />,
         },
       ];
 

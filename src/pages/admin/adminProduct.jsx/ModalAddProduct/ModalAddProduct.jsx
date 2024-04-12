@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import { Modal, Form, Input, Checkbox, Button, Select, Row, Col, InputNumber } from 'antd'
 import { PlusOutlined } from '@ant-design/icons';
-import { Image, Upload } from 'antd'
+import { UploadOutlined } from '@ant-design/icons';
+import { Image, Upload, Space } from 'antd'
 const getBase64 = (file) =>
     new Promise((resolve, reject) => {
         const reader = new FileReader();
@@ -9,6 +10,7 @@ const getBase64 = (file) =>
         reader.onload = () => resolve(reader.result);
         reader.onerror = (error) => reject(error);
     });
+
 const ModalAddProduct = (props) => {
     const { isModalOpenAddProduct, setIsModalOpenAddProduct, handleSubmitAddProduct, listCategory } = props
     const handleCancel = () => {
@@ -17,37 +19,41 @@ const ModalAddProduct = (props) => {
     const [form] = Form.useForm()
 
     //handle upload file
-    const [previewOpen, setPreviewOpen] = useState(false);
-    const [previewImage, setPreviewImage] = useState('');
+    // const [previewOpen, setPreviewOpen] = useState(false);
+    // const [previewImage, setPreviewImage] = useState('');
 
-    const handlePreview = async (file) => {
-        if (!file.url && !file.preview) {
-            file.preview = await getBase64(file.originFileObj);
-        }
-        setPreviewImage(file.url || file.preview);
-        setPreviewOpen(true);
-    };
-    const handleChange = ({ fileList: newFileList }) => setFileList(newFileList);
-    const uploadButton = (
-        <button
-            style={{
-                border: 0,
-                background: 'none',
-            }}
-            type="button"
-        >
-            <PlusOutlined />
-            <div
-                style={{
-                    marginTop: 8,
-                }}
-            >
-                Upload
-            </div>
-        </button>
-    );
+    // const handlePreview = async (file) => {
+    //     if (!file.url && !file.preview) {
+    //         file.preview = await getBase64(file.originFileObj);
+    //     }
+    //     setPreviewImage(file.url || file.preview);
+    //     setPreviewOpen(true);
+    // };
+    // const handleChange = ({ fileList: newFileList }) => setFileList(newFileList);
+    // const uploadButton = (
+    //     <button
+    //         style={{
+    //             border: 0,
+    //             background: 'none',
+    //         }}
+    //         type="button"
+    //     >
+    //         <PlusOutlined />
+    //         <div
+    //             style={{
+    //                 marginTop: 8,
+    //             }}
+    //         >
+    //             Upload
+    //         </div>
+    //     </button>
+    // );
 
-    const [fileList, setFileList] = useState([])
+    // const [fileList, setFileList] = useState([])
+    const handleUploadFile = async() => {
+        const res = await handleUploadFile()
+        console.log('upload file' , res)
+    }
     return (
         <div>
             <Modal title="Create product" open={isModalOpenAddProduct} onOk={form.submit} onCancel={handleCancel}>
@@ -283,7 +289,7 @@ const ModalAddProduct = (props) => {
                         <Input.TextArea />
                     </Form.Item>
 
-                  {/* image && slider   */}
+                    {/* image && slider   */}
                     {/* <Form.Item
                         label="Image"
                         name="image"
@@ -311,7 +317,7 @@ const ModalAddProduct = (props) => {
                     </Form.Item> */}
 
 
-                    <Col span={12}>
+                    {/* <Col span={12}>
                     <Form.Item
                         label="Image"
                         name="image"
@@ -345,7 +351,31 @@ const ModalAddProduct = (props) => {
                         />
                     )}
                     </Form.Item>
-                    </Col>
+                    </Col> */}
+
+                    <Space
+                        direction="vertical"
+                        style={{
+                            width: '100%',
+                        }}
+                        size="large"
+                    >
+                        <Upload
+                            action={handleUploadFile}
+                            listType="picture"
+                            maxCount={1}
+                        >
+                            <Button icon={<UploadOutlined />}>Upload image thumbnail(Max: 1)</Button>
+                        </Upload>
+                        {/* <Upload
+                            action="https://660d2bd96ddfa2943b33731c.mockapi.io/api/upload"
+                            listType="picture"
+                            maxCount={3}
+                            multiple
+                        >
+                            <Button icon={<UploadOutlined />}>Upload image slider (Max: 3)</Button>
+                        </Upload> */}
+                    </Space>
                 </Form>
             </Modal>
         </div>

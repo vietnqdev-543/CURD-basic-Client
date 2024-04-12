@@ -41,9 +41,8 @@ const RegisterPage = () => {
     onFinish={onFinish}
     autoComplete="off"
   >
-    <h1>Register </h1>
+    <h1>Đăng ký</h1>
     <Form.Item
-      label="Email"
       name="email"
       rules={[
         {
@@ -52,10 +51,9 @@ const RegisterPage = () => {
         },
       ]}
     >
-      <Input />
+      <Input className='input' placeholder='Email'/>
     </Form.Item>
     <Form.Item
-      label="Username"
       name="name"
       rules={[
         {
@@ -64,11 +62,10 @@ const RegisterPage = () => {
         },
       ]}
     >
-      <Input />
+      <Input className='input' placeholder='Username'/>
     </Form.Item>
 
     <Form.Item
-      label="Password"
       name="password"
       rules={[
         {
@@ -77,10 +74,9 @@ const RegisterPage = () => {
         },
       ]}
     >
-      <Input.Password />
+      <Input.Password className='input' placeholder='Password' />
     </Form.Item>
     <Form.Item
-      label="Phone"
       name="phone"
       rules={[
         {
@@ -89,20 +85,24 @@ const RegisterPage = () => {
         },
       ]}
     >
-      <Input />
+      <Input className='input' placeholder='Phone'/>
     </Form.Item>
 
 
     <Form.Item
       wrapperCol={{
-        offset: 8,
-        span: 16,
+        offset: 0,
+        span: 24,
       }}
     >
-      <Button type="primary" htmlType="submit">
-        Submit
+      <Button style={{background:'darkred'}} className='input' type="primary" htmlType="submit">
+        Đăng ký
       </Button>
     </Form.Item>
+    <hr />
+   <div style={{textAlign:'center' , paddingTop:'10px'}}>
+      <span>Bạn đã có tài khoản ?<a style={{color:'darkred'}} href="./login"> Đăng nhập</a></span>
+   </div>
   </Form>
     </div>
   )

@@ -6,7 +6,7 @@ import { useEffect, useState } from 'react';
 
 import {useLocation} from 'react-router-dom'
 import { callFetchProductById } from '../../../services/productApi';
-import { render } from 'react-dom';
+
 
 
 const ProductDetail = ({}) => {
@@ -18,6 +18,7 @@ const ProductDetail = ({}) => {
   useEffect(() => {
     if (id) {
       fetchProductById(id);
+    
     }
   }, [id]);
 
@@ -78,9 +79,14 @@ const ProductDetail = ({}) => {
           </div>
           <div className="price">{dataProduct.price && dataProduct.price.toLocaleString('it-IT', { style: 'currency', currency: 'VND' })}</div>
           <div className='count'>
-            <button onClick={()=>{handleRemoveCount()}}>-</button>
-            <input type="text" value={countProduct} />
-            <button onClick={()=>{handleAddCount()}}>+</button>
+            <div>
+              <button onClick={()=>{handleRemoveCount()}}>-</button>
+              <input type="text" value={countProduct} />
+              <button onClick={()=>{handleAddCount()}}>+</button>
+            </div>
+            <div style={{fontSize:20 , padding:'0 20px'}}>
+              Đã bán : {dataProduct.sold}
+            </div>
           </div>
 
 
@@ -102,4 +108,4 @@ const ProductDetail = ({}) => {
   )
 }
 
-export default ProductDetail
+export default ProductDetail;

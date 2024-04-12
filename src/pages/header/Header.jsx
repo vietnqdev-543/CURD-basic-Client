@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { callLogoutUser } from '../../services/userApi';
 import { useNavigate } from 'react-router-dom';
 import { doLogoutAction } from '../../redux/account/acccountSlice';
-import UpdateUser from '../UpdateUser/UpdateUser';
+import UpdateUser from '../../components/UpdateUser/UpdateUser';
 import { useState } from 'react';
 const Header = () => {
   const isLogin = useSelector(state => state.account.isLogin)

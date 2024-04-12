@@ -24,6 +24,12 @@ export const accountSlice = createSlice({
        state.isLogin = true 
        state.user= action.payload
     },
+    doUpdateInfo : (state, action) =>{
+      state.user = action.payload
+    } ,
+    doChangePassword : (state, action) => {
+      state.user = action.payload
+    },
     doLogoutAction : (state , action) => {
       state.isLoading = true
       state.isLogin = false
@@ -39,10 +45,11 @@ export const accountSlice = createSlice({
         createdAt : '' ,
       })
     }
+
   },
 })
 
 // Action creators are generated for each case reducer function
-export const { doLoginAction , doLogoutAction} = accountSlice.actions
+export const { doLoginAction , doLogoutAction , doChangePassword,doUpdateInfo} = accountSlice.actions
 
 export default accountSlice.reducer

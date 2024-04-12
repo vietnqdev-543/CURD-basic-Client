@@ -18,3 +18,6 @@ export const callFetchAllUser = () => {
 export const callDeleteUser = (_id) => {
   return axios.post(`http://localhost:3003/user/deleteUser/${_id}`)
 }
+export const callChangePassword = (values) => {
+  return axios.post(`http://localhost:3003/user/changePassword` , {values})
+}

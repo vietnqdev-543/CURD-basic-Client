@@ -3,12 +3,17 @@ import { callFetchAllProduct } from "../../services/productApi"
 import {  Card, Col, Row} from "antd"
 import { useNavigate } from 'react-router-dom'
 import ProductDetail from "./ProductDetail/ProductDetail"
+import SpinLoading from "../../components/spinLoading/SpinLoading"
 const { Meta } = Card
 const ProductPage = () => {
   const navigate = useNavigate()
   const [listProduct, setListProduct] = useState([])
+  const [isLoading , setIsLoading] = useState(false)
   useEffect(() => {
-    handleFetchAccount()
+    
+    setTimeout(()=>{
+      handleFetchAccount()
+    },[1000])
   }, [])
 
   const handleFetchAccount = async () => {

@@ -45,6 +45,10 @@
 
         .count{
             margin-bottom: 30px ;
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            flex-direction: row;
             button{
                 padding: 12px 20px;
                 font-size: 20px;

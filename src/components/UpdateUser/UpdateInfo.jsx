@@ -3,44 +3,36 @@ import { Button, Checkbox, Form, Input, message , Alert , Space } from 'antd';
 import { useDispatch, useSelector } from 'react-redux';
 import { callLogoutUser, callUpdateUser } from '../../services/userApi';
 import { useNavigate } from 'react-router-dom';
+import { doUpdateInfo } from '../../redux/account/acccountSlice';
 const UpdateInfo = ({setIsModalOpen}) => {
   const navigate = useNavigate()
-  const dispath = useDispatch
+  const dispath = useDispatch()
 
   const id = useSelector(state => state.account.user._id)
   const email = useSelector(state => state.account.user.email)
   const name = useSelector(state => state.account.user.name)
   const phone = useSelector(state => state.account.user.phone)
-  const handleLogout = async() => {
-    const res = await callLogoutUser()
-    console.log(res)
-    dispath(callLogoutUser())
-  }
 
-  const alert = () => {
-    <Alert
-    message="Thông báo"
-    description="Bạn vừa cập nhật thông tin , vui lòng đăng nhập lại"
-    type="info"
-    action={
-      <Space direction="vertical">
-        <Button   size="small" type="primary">
-          Accept
-        </Button>
-      </Space>
+
+  const onFinish = async (values) => {
+    const { id, email, name, phone } = values;
+    try {
+      const res = await callUpdateUser(values);
+      if (res && res.data) {
+        console.log('data update' ,res.data.user); 
+        dispath(doUpdateInfo(res.data.user));
+        message.success('Cập nhật thông tin thành công');
+        setIsModalOpen(false);
+      } else {
+        console.log('Có lỗi xảy ra khi cập nhật thông tin');
+        message.error('Có lỗi xảy ra khi cập nhật thông tin');
+      }
+    } catch (error) {
+      console.log('Có lỗi xảy ra khi cập nhật thông tin:', error);
+      message.error('Có lỗi xảy ra khi cập nhật thông tin');
     }
-    closable
-  />
-  }
-
-  const onFinish = async(values) => {
-    const {id , email , name , phone} = values
-    console.log('Success:',values );
-    const res = await callUpdateUser(values)
-    console.log(res)
-    message.success('Cập nhật thông tin thành công')
-    setIsModalOpen(false)
   };
+  
   return (
     <div>
        <Form
@@ -91,6 +83,7 @@ const UpdateInfo = ({setIsModalOpen}) => {
     <Form.Item
       label="UserName"
       name="name"
+      initialValue={name}
       rules={[
         {
           required: true,
@@ -98,12 +91,14 @@ const UpdateInfo = ({setIsModalOpen}) => {
         },
       ]}
     >
-      <Input placeholder={name}/>
+      <Input />
     </Form.Item>
 
     <Form.Item
       label="Phone"
       name="phone"
+    
+      initialValue={phone}
       rules={[
         {
           required: true,
@@ -111,7 +106,7 @@ const UpdateInfo = ({setIsModalOpen}) => {
         },
       ]}
     >
-      <Input placeholder={phone}/>
+      <Input/>
     </Form.Item>
 
 
