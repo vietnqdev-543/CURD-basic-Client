@@ -1,13 +1,11 @@
-import React from 'react'
-import { Flex, Spin } from 'antd';
-const SpinLoading = () => {
+import RingLoader from "react-spinners/RingLoader";
+const Loading = () => {
+    const style = {position:'fixed' , top: "50%" , left : '50%', color :'blue' , transform : "translate(-50% , -50%)"}
   return (
-    <div className='style' style={{width:'100%', height:'70vh',display:'flex' , justifyContent:'center', alignItems:'center'}}>
-         <Flex align="center" gap="middle">
-             <Spin size="large" />
-        </Flex>
+    <div>
+        <RingLoader style={style}  />
     </div>
   )
 }
 
-export default SpinLoading
+export default Loading

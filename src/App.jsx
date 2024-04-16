@@ -4,23 +4,23 @@ import {
   RouterProvider,
   Outlet,
 } from "react-router-dom";
-import HomePage from './pages/home/HomePage'
-import ProductPage from './pages/product/ProductPage';
-import NotFound from './pages/notFound/NotFound';
-import LoginPage from './pages/login/LoginPage';
-import Header from './pages/header/Header';
-import RegisterPage from './pages/register/Register';
+import ProductPage from './pages/productPage/ProductPage';
+import NotFound from './components/notFound/NotFound';
+import LoginPage from './pages/loginPage/LoginPage';
+import Header from './pages/headerPage/Header';
+import RegisterPage from './pages/registerPage/Register';
 import Marquee from './components/marquee/Marquee';
-import LayoutAdmin from './pages/admin/layoutAdmin/LayoutAdmin';
-import AdminDashboard from './pages/admin/adminDashboard/AdminDashboard';
-import AdminProduct from './pages/admin/adminProduct.jsx/AdminProduct';
+import LayoutAdmin from './pages/adminPage/layoutAdmin/LayoutAdmin';
+import AdminDashboard from './pages/adminPage/adminDashboard/AdminDashboard';
+import AdminProduct from './pages/adminPage/adminProduct.jsx/AdminProduct';
 import ProtectedRoute from './components/protectedRoute/ProtectedRoute';
-import AdminUser from './pages/admin/adminUser/AdminUser';
-import AdminCategory from './pages/admin/adminCategory/AdminCategory' ;
-import AdminOrder from './pages/admin/adminOrder/AdminOrder'
-import ProductDetail from './pages/product/ProductDetail/ProductDetail';
+import AdminUser from './pages/adminPage/adminUser/AdminUser';
+import AdminCategory from './pages/adminPage/adminCategory/AdminCategory' ;
+import AdminOrder from './pages/adminPage/adminOrder/AdminOrder'
+import ProductDetail from './pages/productPage/ProductDetail/ProductDetail';
 import Blog from './pages/blogPage/Blog';
-import Footer from './pages/footer/Footer'
+import Footer from './pages/footerPage/Footer'
+import HomePage from './pages/homePage/HomePage';
 import {useSelector} from 'react-redux'
 
 function App() {

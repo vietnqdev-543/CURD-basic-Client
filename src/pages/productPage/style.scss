@@ -1,0 +1,26 @@
+.product-container{
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    padding: 20px 0;
+    min-height: 80vh;
+    .item{
+       margin-bottom: 20px;
+        .price{
+            font-size: 25px;
+            font-weight: bold;
+            color: darkred;
+        }
+        
+    }
+}
+@media screen and (max-width:600px) {
+    .product-container{
+        .item{
+            .price{
+                font-size: 15px;
+            }
+        }
+    }
+}

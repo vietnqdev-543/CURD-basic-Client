@@ -1,0 +1,13 @@
+.container{
+    min-height: 100%;
+    .form{
+        h1{text-align: center; padding: 20px 0; text-transform: uppercase;}
+        width: 450px;
+        padding: 20px 40px;
+        box-shadow: 5px 5px 10px #888888;
+        border-radius: 10px;
+        .input{
+            padding: 10px 20px;
+        }
+    }
+}

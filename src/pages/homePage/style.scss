@@ -1,0 +1,175 @@
+.home-container {
+  width: 100%;
+  min-height: 100vh;
+
+  .c1 {
+    max-width: 100%;
+    height: auto;
+    margin-bottom: 20px;
+
+    
+  }
+
+  .c2 {
+    width: 100%;
+    display: grid;
+    padding: 20px 12%;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: repeat(2, 300px);
+    grid-gap: 10px;
+    grid-template-areas: 'aa aa bb cc '
+      ' aa aa dd dd';
+
+    .item {
+      border-radius: 10px;
+      color: white;
+
+      .name {
+        height: 100%;
+        width: 100%;
+        display: flex;
+        padding: 10px;
+        align-items: flex-end;
+        font-size: 20px;
+        font-weight: bold;
+
+      }
+
+    }
+
+    .item:hover {
+      border: 5px solid darkred;
+      color: darkred;
+    }
+
+    .item1 {
+      grid-area: aa;
+      background-image: url('https://donghomytan.vn/wp-content/uploads/2019/10/banner-sp-moi.png');
+      background-size: cover;
+      background-repeat: no-repeat;
+      background-position: center;
+    }
+
+    .item2 {
+      grid-area: bb;
+      background-image: url('https://trevang.vn/wp-content/uploads/2015/07/dong-ho-nam-cach-mua-di-tiec.jpg');
+      background-size: cover;
+    }
+
+    .item3 {
+      grid-area: cc;
+      background-image: url('https://laodongthudo.vn/stores/news_dataimages/khanhly/082016/11/10/5706_dong-ho-michael.jpg');
+      background-size: cover;
+    }
+
+    .item4 {
+      grid-area: dd;
+      background-image: url('https://cdn.tgdd.vn/Files/2019/07/13/1179294/660x380_12-20170520143329.jpg');
+      background-size: cover;
+      background-repeat: no-repeat;
+      background-position: center;
+    }
+  }
+
+  .c4 {
+    width: 100%;
+    margin: 10px 0;
+    text-align: center;
+
+    .title {
+      text-transform: uppercase;
+      font-size: 30px;
+      padding: 20px 0;
+    }
+
+    .item {
+      width: 100%;
+      border-radius: 5px;
+      margin-bottom: 30px;
+      .thumbnail {
+        height: 60%;
+        width: 100%;
+        border-top-left-radius: 10px;
+        border-top-right-radius: 10px;
+
+        img {
+          width: 100%;
+          height: 100%;
+          background-size: cover;
+          border-top-left-radius: 10px;
+          border-top-right-radius: 10px;
+        }
+      }
+
+      .name {
+        margin: 0 auto;
+        text-transform: uppercase;
+        font-size: 18px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        width: 100%;
+        white-space: nowrap;
+      }
+
+      .price{
+        font-size: 30px;
+        color: darkred;
+        padding: 5px 0;
+        font-weight: bold;
+      }
+
+      .viewdetail {
+        text-transform: uppercase;
+        font-size: 20px;
+        padding: 5px 0;
+        cursor: pointer;
+
+        a {
+          color: black;
+        }
+      }
+
+      .viewdetail:hover {
+        text-decoration: underline;
+        a {
+          color: darkred;
+        }
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .home-container {
+    .c2{
+      padding: 12px 0;
+      grid-template-rows: repeat(2, 100px);
+      .item{
+        .name{
+          font-size: 10px;
+        }
+      }.item:hover{
+        border: 3px solid darkred;
+      }
+    }
+    .c4{
+      margin: 10px 0;
+      .title{
+        font-size: 20px;
+      }
+      .item{
+        // height: 150px;
+        // .thumbnail{
+        //   img{
+        //     width: 100%;
+        //     height: auto;
+        // }}
+        .name{font-size: 10px;}
+        .price{font-size: 12px}
+        .viewdetail{font-size: 13px;}
+      }
+    }
+  }
+}
+
+

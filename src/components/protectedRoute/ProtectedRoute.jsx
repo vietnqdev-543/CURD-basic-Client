@@ -1,6 +1,6 @@
 import React, { Children } from 'react'
 import { useSelector } from 'react-redux'
-import NotFound from '../../pages/notFound/NotFound'
+import NotFound from '../notFound/NotFound'
 
 const ProtectedRoute = ({children}) => {
     const isAdmin = useSelector(state => state.account.user.isAdmin)

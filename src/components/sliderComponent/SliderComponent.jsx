@@ -6,7 +6,7 @@ import { Image } from 'antd';
 
 const SliderComponents = ({ arrImg }) => {
   const settings = {
-    dots: false,
+    dots: true,
     infinite: true, // chạy liên tục
     slidesToShow: 1,
     slidesToScroll: 1,
@@ -20,7 +20,7 @@ const SliderComponents = ({ arrImg }) => {
         <Slider {...settings}>
           {arrImg.map((item, index) => (
             <div key={index}>
-              <Image src={item} alt="slider" preview={false} width='100%' />
+              <Image src={item} alt="slider" preview={false} width='100%'  />
             </div>
           ))}
         </Slider>
