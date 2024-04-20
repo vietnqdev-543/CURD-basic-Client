@@ -16,12 +16,12 @@ const LoginPage = () => {
     if (response?.data) {
       dispath(doLoginAction(response.data.users))
       localStorage.setItem('access_token', response.data.access_token)
-      message.success(response.data.message)
+      message.success('Đăng nhập thành công')
 
       navigate('/')
     } else {
       console.log(error)
-      message.error(error)
+      message.error('Tài khoản hoặc mật khẩu không chính xác')
 
     }
   };
@@ -51,7 +51,7 @@ const LoginPage = () => {
           rules={[
             {
               required: true,
-              message: 'Please input your username!',
+              message: 'Please input your email!',
             },
           ]}
         >

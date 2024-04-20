@@ -1,16 +1,18 @@
 import { createSlice } from '@reduxjs/toolkit'
+import { Avatar } from 'antd'
 
 const initialState = {
     isLoading: true,
     isLogin : false , 
     user : {
+      id : '' ,
         isAdmin : '',
         email : '' ,
         name : '',
         password : '' , 
         phone : '',
         image : '',
-        id : '' ,
+        Avatar : '' ,
         createdAt : '' ,
     } ,
 }
@@ -42,6 +44,7 @@ export const accountSlice = createSlice({
         phone : '',
         image : '',
         id : '' ,
+        avatar : '',
         createdAt : '' ,
       })
     }

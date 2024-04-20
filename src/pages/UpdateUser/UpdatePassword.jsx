@@ -7,6 +7,7 @@ import { doChangePassword, doLogoutAction } from '../../redux/account/acccountSl
 const UpdatePassword = ({setIsModalOpen}) => {
   const navigate = useNavigate()
   const dispath = useDispatch()
+  const passwordOld = useSelector(state => state.account.user.password)
 
   const id = useSelector(state => state.account.user._id)
 
@@ -23,8 +24,13 @@ const UpdatePassword = ({setIsModalOpen}) => {
   }
 
   const onFinish = async({id , newPassword , password}) => {
-    const res = await callChangePassword({id , newPassword , password})
-    if (res && res.data) {
+    const res = await callChangePassword({id , newPassword ,   password})
+    if(password !==  passwordOld){
+      return message.error('Mật khẩu cũ không chính xác')
+    }else if(passwordOld === newPassword){
+      return message.error('Mật khẩu mới không được giống với mật khẩu cũ')
+    }
+    else if(res && res.data) {
       console.log('update password :' , res.data)
       message.success('Thay đổi mật khẩu thành công')
       setIsModalOpen(false)
@@ -97,12 +103,12 @@ const UpdatePassword = ({setIsModalOpen}) => {
 
     <Form.Item
       wrapperCol={{
-        offset: 20,
+        offset: 0,
         span: 24,
       }}
     >
-      <Button type="primary" htmlType="submit">
-        Submit
+      <Button style={{width:'100%'}} type="primary" htmlType="submit">
+        Cập nhật
       </Button>
     </Form.Item>
   </Form>

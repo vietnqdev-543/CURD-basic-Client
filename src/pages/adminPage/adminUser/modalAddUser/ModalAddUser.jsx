@@ -1,10 +1,14 @@
 import React from 'react'
 import { Modal, Form, Input, Button } from 'antd'
-const ModalAddUser = ({ isModalOpenAddUser, dataUpdateUser, handleSubmitAddProduct , handleCancelModalAddUser }) => {
+const ModalAddUser = (props) => {
+    const { modalAddUser, setModalAddUser, handleSubmitAddProduct} = props
     const [form] = Form.useForm()
+    const handleCancelModalAddUser = ()=>{
+        setModalAddUser(false)
+      }
     return (
         <div>
-            <Modal title="Basic Modal" open={isModalOpenAddUser} onOk={form.submit} onCancel={handleCancelModalAddUser}>
+            <Modal title="Basic Modal" open={modalAddUser} onOk={form.submit} onCancel={handleCancelModalAddUser}>
                 <Form
                 form={form}
                     name="basic"

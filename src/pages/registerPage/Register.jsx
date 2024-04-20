@@ -7,16 +7,17 @@ import { useNavigate } from 'react-router-dom';
 const RegisterPage = () => {
   const navigate = useNavigate()
   const onFinish = async(values) => {
-    const {email , name , password , phone} = values
+    const {email , name , confirmPassword , password , phone} = values
+    if(password !== confirmPassword){
+      return message.error('Mật khẩu không khớp')
+    }
     const res = await callCreateUser(values)
-    try {
+    if(res && res?.data){
       console.log(res)
-      console.log('Success:', values);
-      message.success('create user succesfully')
+      message.success('Tạo tài khoản thành công ')
       navigate('/login')
-    } catch (error) {
-      console.log('error :' , error)
-      message.error('error')
+    }else{
+      message.error('Đăng ký thất bại')
     }
 
   };
@@ -75,6 +76,18 @@ const RegisterPage = () => {
       ]}
     >
       <Input.Password className='input' placeholder='Password' />
+    </Form.Item>
+
+    <Form.Item
+      name="confirmPassword"
+      rules={[
+        {
+          required: true,
+          message: 'Please input your confirm password!',
+        },
+      ]}
+    >
+      <Input.Password className='input' placeholder='Confirm password' />
     </Form.Item>
     <Form.Item
       name="phone"

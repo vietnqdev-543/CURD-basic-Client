@@ -1,5 +1,5 @@
-import React, { useEffect } from 'react'
-import { Button, Checkbox, Form, Input, message , Alert , Space } from 'antd';
+import React, { useEffect, useState } from 'react'
+import { Button, Checkbox, Form, Input, message , Alert , Space, Row , Col} from 'antd';
 import { useDispatch, useSelector } from 'react-redux';
 import { callLogoutUser, callUpdateUser } from '../../services/userApi';
 import { useNavigate } from 'react-router-dom';
@@ -12,12 +12,14 @@ const UpdateInfo = ({setIsModalOpen}) => {
   const email = useSelector(state => state.account.user.email)
   const name = useSelector(state => state.account.user.name)
   const phone = useSelector(state => state.account.user.phone)
-
+  const avatar = useSelector(state => state.account.user.avatar)
+  const [form] = Form.useForm()
 
   const onFinish = async (values) => {
-    const { id, email, name, phone } = values;
+    const { id, email, name, phone , avatar } = values;
     try {
       const res = await callUpdateUser(values);
+      console.log('check' , res, values)
       if (res && res.data) {
         console.log('data update' ,res.data.user); 
         dispath(doUpdateInfo(res.data.user));
@@ -32,10 +34,24 @@ const UpdateInfo = ({setIsModalOpen}) => {
       message.error('Có lỗi xảy ra khi cập nhật thông tin');
     }
   };
-  
+
+  const [dataAvatar , setDataAvatar] = useState(avatar)
+  const convertBase64 =  (e) => {
+    const reader = new FileReader();    
+    reader.readAsDataURL(e.target.files[0]);
+    reader.onload = () => {
+        console.log('check:', reader.result);
+        setDataAvatar(reader.result)
+        form.setFieldsValue({ avatar: reader.result });
+    };
+    reader.onerror = (error) => {
+        console.log(error);
+    };
+  }  
   return (
     <div>
        <Form
+       form={form}
     name="basic"
     labelCol={{
       span: 24,
@@ -43,16 +59,32 @@ const UpdateInfo = ({setIsModalOpen}) => {
     wrapperCol={{
       span: 24,
     }}
-    style={{
-      maxWidth: 600,
-    }}
+    
     initialValues={{
       remember: true,
-    }}
+    }}  
     onFinish={onFinish}
     autoComplete="off"
   >
-        <Form.Item
+   <Row>
+    <Col span={12}>
+    <Form.Item
+      name="avatar"
+      rules={[
+        {
+          required: false,
+          message: 'Please input your avatar!',
+        },
+      ]}
+    >
+      <img src={dataAvatar} alt=""  style={{width:'200px' , height:'200px' , borderRadius:'50%'}}/>
+      <input  type="file" title='Chọn ảnh' onChange={convertBase64} />
+
+      
+    </Form.Item>
+    </Col>
+    <Col span={12}>
+    <Form.Item
       label="ID"
       name="id"
       initialValue={id}
@@ -81,7 +113,7 @@ const UpdateInfo = ({setIsModalOpen}) => {
     </Form.Item>
 
     <Form.Item
-      label="UserName"
+      label="Tên hiển thị"
       name="name"
       initialValue={name}
       rules={[
@@ -95,7 +127,7 @@ const UpdateInfo = ({setIsModalOpen}) => {
     </Form.Item>
 
     <Form.Item
-      label="Phone"
+      label="Số điện thoại"
       name="phone"
     
       initialValue={phone}
@@ -107,17 +139,18 @@ const UpdateInfo = ({setIsModalOpen}) => {
       ]}
     >
       <Input/>
-    </Form.Item>
+    </Form.Item></Col>
+   </Row>
 
 
     <Form.Item
       wrapperCol={{
-        offset: 20,
+        offset: 0,
         span: 24,
       }}
     >
-      <Button type="primary" htmlType="submit">
-        Submit
+      <Button style={{width:'100%'}} type="primary" htmlType="submit">
+        Cập nhật
       </Button>
     </Form.Item>
   </Form>

@@ -12,6 +12,7 @@ const Header = () => {
   const isLogin = useSelector(state => state.account.isLogin)
   const userName = useSelector(state => state.account.user.name)
   const isAdmin = useSelector(state => state.account.user.isAdmin)
+  const avatar = useSelector(state => state.account.user.avatar)
   const navigate = useNavigate()
   const dispath = useDispatch()
   const handleLogout = async() => {
@@ -73,7 +74,7 @@ const Header = () => {
               <Space>
                 <div className="userName">
                   <div className='logo'>
-                    <Avatar size="small" icon={<UserOutlined />} />
+                    <Avatar src={avatar} size="medium" icon={<UserOutlined /> } />
                   </div>
                   <div className='name'>{userName}</div>
                   <DownOutlined />
@@ -95,7 +96,7 @@ const Header = () => {
           <a href="/">Home</a>
           <a href="/product">Product</a>
           <a href="/blog">Blog</a>
-          <a href="#">Contact</a>
+          <a href="/contact">Contact</a>
           <a href="#">About</a>
         </div>
     </div>

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Button, Drawer, Descriptions , Image} from 'antd';
+import { Button, Drawer, Descriptions, Image, Divider } from 'antd';
 import moment from 'moment'
 const DrawerViewDetailProduct = ({ setOpenDrawerViewDetail, openDrawerViewDetail, dataProductViewDetail, setDataProductViewDetail }) => {
 
@@ -16,7 +16,7 @@ const DrawerViewDetailProduct = ({ setOpenDrawerViewDetail, openDrawerViewDetail
           </Descriptions.Item>
           <Descriptions.Item label="Hãng" >{dataProductViewDetail?.brand}</Descriptions.Item>
           <Descriptions.Item label="Phân loại">{dataProductViewDetail?.sex}</Descriptions.Item>
-          <Descriptions.Item label="Chống nước">{dataProductViewDetail?.waterproof}</Descriptions.Item>
+          <Descriptions.Item label="Chống nước">{dataProductViewDetail?.proof ? <>Có </> : <>Không</>}</Descriptions.Item>
           <Descriptions.Item label="Giá tiền">
             {parseInt(dataProductViewDetail?.price).toLocaleString('vi-VN')} vnd
           </Descriptions.Item>
@@ -29,21 +29,25 @@ const DrawerViewDetailProduct = ({ setOpenDrawerViewDetail, openDrawerViewDetail
           <Descriptions.Item label="Ngày cập nhật">
             {moment(dataProductViewDetail?.updatedAt).format('HH:mm:ss DD-MM-YYYY')}
           </Descriptions.Item>
-          <Descriptions.Item label="Ảnh đại diện">
-            <Image
-              width={200}
-              src={dataProductViewDetail.image}
-            />
-          </Descriptions.Item>
-          <Descriptions.Item label="Ảnh slider">
-            <Image
-              width={200}
-              src={dataProductViewDetail?.slider}
-            />
 
-          </Descriptions.Item>
-          
         </Descriptions>
+        <Divider orientation="left">Ảnh sản phẩm</Divider>
+        <div style={{display:'flex', alignItems:'center', justifyContent:'flex-start' ,width:'100%' }}>
+        <Image
+          style={{ width: '150px', height: 'auto' , padding:'0 10px'   }}
+          width={200}
+          src={dataProductViewDetail.image}
+        />
+        {dataProductViewDetail?.slider && dataProductViewDetail.slider.map((item, index) => (
+          <Image
+            style={{ width: '150px', height: 'auto' , padding:'0 10px' }}
+            key={index}
+            width={200}
+            src={item}
+          />
+        ))}
+        </div>
+
       </Drawer>
     </div>
   )

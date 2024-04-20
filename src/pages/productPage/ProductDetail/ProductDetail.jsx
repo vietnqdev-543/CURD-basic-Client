@@ -33,12 +33,18 @@ const ProductDetail = ({}) => {
   }
 
   const images = [
-   {
-    original :dataProduct.image ,
-    thumbnail : dataProduct.image ,
-    originalClass : 'originalClass'
-   }
-  ]
+    {
+      original: dataProduct.image,
+      thumbnail: dataProduct.image,
+      originalClass: 'originalClass'
+    },
+    ...(dataProduct.slider ? dataProduct.slider.map((item, index) => ({
+      original: item,
+      thumbnail: item,
+      originalClass: 'originalClass'
+    })) : [])
+  ];
+  
   
   //count product
   const [countProduct , setCountProduct] = useState(1)
@@ -70,7 +76,8 @@ const ProductDetail = ({}) => {
             <div className="object"> <span>Đối tượng :</span> {dataProduct.sex}</div>
             <div className="size"><span>Kích cỡ :</span> {dataProduct.size}</div>
             <div className="waterproof"><span>Kháng nước :</span> {dataProduct.waterproof ? "Có" : "Không"}</div>
-            <div className="des"> {dataProduct.description}</div>
+            <div className="des"> <span>Mô tả :</span> {dataProduct.description}</div>
+            <div className="quantity"><span>Số lượng còn lại :</span> {dataProduct.quantity}</div>
           </div>
           <div className="price">{dataProduct.price && dataProduct.price.toLocaleString('it-IT', { style: 'currency', currency: 'VND' })}</div>
           <div className='count'>
@@ -86,10 +93,10 @@ const ProductDetail = ({}) => {
 
           <Row gutter={12}>
             <Col span={12}>
-              <button style={{ width: '100%', padding: '18px 0', border: 'none', backgroundColor: 'darkRed', color: 'white', borderRadius: '5px', fontSize: '18px' }}>Thêm vào giỏ hàng</button>
+              <button className='btn-addCart' style={{ width: '100%', padding: '18px 0', border: 'none', backgroundColor: 'darkRed', color: 'white', borderRadius: '5px', fontSize: '18px' }}>Thêm vào giỏ hàng</button>
             </Col>
             <Col span={12}>
-              <button style={{ width: '100%', padding: '18px 0', border: 'none', backgroundColor: 'darkBlue', color: 'white', borderRadius: '5px', fontSize: '18px' }}>Mua ngay</button>
+              <button className='btn-buy' style={{ width: '100%', padding: '18px 0', border: 'none', backgroundColor: 'darkBlue', color: 'white', borderRadius: '5px', fontSize: '18px' }}>Mua ngay</button>
             </Col>
           </Row>
         </Col>

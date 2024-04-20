@@ -72,7 +72,7 @@ const ProductPage = () => {
       let sortedList = [...listProduct];
       switch (sortQuery) {
         case 'listProductToSold':
-          sortedList.sort((a, b) => b.soldQuantity - a.soldQuantity);
+          sortedList.sort((a, b) => b.sold - a.sold);
           break;
         case 'listProductToUpdateAt':
           sortedList.sort((a, b) => new Date(b.updatedAt) - new Date(a.updatedAt));

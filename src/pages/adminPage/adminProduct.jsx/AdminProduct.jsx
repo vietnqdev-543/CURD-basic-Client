@@ -26,21 +26,21 @@ const AdminProduct = () => {
       render: (text) => <a onClick={()=>{setOpenDrawerViewDetail(true)}}>{text}</a>,
     },
     {
-      title: 'Name Product',
+      title: 'Tên sản phẩm',
       dataIndex: 'name',
       key : 2 ,
     },
     {
-      title: 'Brand',
+      title: 'Thương hiệu',
       dataIndex: 'brand',
     },
     {
-      title: 'Quantity',
+      title: 'Số lượng',
       dataIndex: 'quantity',
       key : 3 ,
     },
     {
-      title: 'Price',
+      title: 'Giá',
       dataIndex: 'price',
       key : 4 ,
       render: (text) => <div>{parseInt(text).toLocaleString('vi-VN')} vnd</div>
@@ -48,16 +48,20 @@ const AdminProduct = () => {
     },
 
     {
-      title: 'Action',
+      title: 'Hành động',
       key:5 ,
       render: (text, record, index) => {
         return (
           <div> 
             <Space size="middle">
-              <Button onClick={() => { setIsModalOpenUpateProduct(true), setDataProductUpdate(record), console.log(record) }} >Update </Button>
+
+              <Button onClick={() => { setModalUpdateProduct(true), setDataProductUpdate(record), console.log(record) }} >
+                Update 
+              </Button>
+
               <Popconfirm
-                title="Thông báo"
-                description="Bạn thật sự muốn xoá tài khoản này?"
+                title="Xoá sản phẩm"
+                description="Bạn thật sự muốn xoá sản phẩm này?"    
                 onConfirm={()=>{handleConfirmDeleteProduct() }}
                 onCancel={handleCancelDeleteProduct}
                 okText="Yes"
@@ -65,6 +69,7 @@ const AdminProduct = () => {
               >
                 <Button danger onClick={()=>{ setDataDeleteProduct(record) , console.log('dataDeleteProduct :' , dataDeleteProduct)}}>Delete</Button>
               </Popconfirm>
+
               <Button onClick={() => { setOpenDrawerViewDetail(true), setDataProductViewDetail(record), console.log(dataProductViewDetail) }}>View Detail</Button>
             </Space>
           </div>
@@ -74,9 +79,9 @@ const AdminProduct = () => {
   ];
 
   //---create Product---
-  const [isModalOpenAddProduct, setIsModalOpenAddProduct] = useState(false);
+  const [modalAddProduct, setModalAddProduct] = useState(false);
   const showModalAddProduct = () => {
-    setIsModalOpenAddProduct(true);
+    setModalAddProduct(true);
   };
   const handleSubmitAddProduct = async (values) => {
     const { name, brand, price, size, waterproof, quantity, sold, sex, image, description , slider} = values
@@ -84,11 +89,11 @@ const AdminProduct = () => {
     console.log('check', res)
     try {
       message.success('Create product Succesfully')
-      setIsModalOpenAddProduct(false)
-      window.location.reload();
+      setModalAddProduct(false)
+    getAllProduct()
     } catch (error) {
       message.error(error.message)
-      setIsModalOpenAddProduct(false)
+      setModalAddProduct(false)
     }
   }
   //---end---
@@ -96,7 +101,7 @@ const AdminProduct = () => {
 
   //modal update product
   const [dataProductUpdate, setDataProductUpdate] = useState([])
-  const [isModalOpenUpdateProduct, setIsModalOpenUpateProduct] = useState(false)
+  const [modalUpdateProduct, setModalUpdateProduct] = useState(false)
   const handleSubmitUpdateProduct = async (values) => {
     const { _id, name, brand, sex, waterproof, size, price, quantity, sold, description, image , slider} = values
     console.log('values ', values)
@@ -104,10 +109,11 @@ const AdminProduct = () => {
     console.log('res', res)
     if (res) {
       message.success('Cập nhật sản phẩm thành công')
-      setIsModalOpenUpateProduct(false)
+      setModalUpdateProduct(false)
+      getAllProduct()
     } else {
       message.error('error', error)
-      setIsModalOpenUpateProduct(false)
+      setModalUpdateProduct(false)
     }
   }
 
@@ -168,12 +174,14 @@ const fetchAllCategory = async() => {
 
   return (
     <div>
-      <ModalAddProduct isModalOpenAddProduct={isModalOpenAddProduct} setIsModalOpenAddProduct={setIsModalOpenAddProduct} handleSubmitAddProduct={handleSubmitAddProduct} listCategory={listCategory} />
-      <ModalUpdateProduct isModalOpenUpdateProduct={isModalOpenUpdateProduct} setIsModalOpenUpateProduct={setIsModalOpenUpateProduct} handleSubmitUpdateProduct={handleSubmitUpdateProduct} dataProductUpdate={dataProductUpdate}  listCategory={listCategory} />
+      <ModalAddProduct modalAddProduct={modalAddProduct} setModalAddProduct={setModalAddProduct} handleSubmitAddProduct={handleSubmitAddProduct} listCategory={listCategory} />
+
+      <ModalUpdateProduct modalUpdateProduct={modalUpdateProduct} setModalUpdateProduct={setModalUpdateProduct} handleSubmitUpdateProduct={handleSubmitUpdateProduct} dataProductUpdate={dataProductUpdate} setDataProductUpdate={setDataProductUpdate}  listCategory={listCategory} />
+
       <DrawerViewDetailProduct dataProductViewDetail={dataProductViewDetail} setDataProductViewDetail={setDataProductViewDetail} setOpenDrawerViewDetail={setOpenDrawerViewDetail} openDrawerViewDetail={openDrawerViewDetail}
       />
       <div style={{ paddingBottom: '10px', }}>
-        <Button style={{ marginRight: '10px', }} onClick={showModalAddProduct}>Add Product</Button>
+        <Button style={{ marginRight: '10px', }} onClick={showModalAddProduct}> Thêm sản phẩm</Button>
         <Button onClick={handleExportExcel}>Export Excel</Button>
       </div>
       <Table columns={columns} dataSource={allProduct} />

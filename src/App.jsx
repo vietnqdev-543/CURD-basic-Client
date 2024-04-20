@@ -22,6 +22,7 @@ import Blog from './pages/blogPage/Blog';
 import Footer from './pages/footerPage/Footer'
 import HomePage from './pages/homePage/HomePage';
 import {useSelector} from 'react-redux'
+import ContactPage from './pages/contactPage/ContactPage';
 
 function App() {
   const style = {margin : '0 40px'}
@@ -49,7 +50,8 @@ function App() {
         {path : '/login' , element :<LoginPage />},
         {path : '/register' , element : <RegisterPage />} ,
         {path : `product/:slug` ,element: <ProductDetail />} ,
-        {path : '/blog' , element : <Blog />}
+        {path : '/blog' , element : <Blog />} ,
+        {path : '/contact' , element: <ContactPage />}
       ]
       
     },

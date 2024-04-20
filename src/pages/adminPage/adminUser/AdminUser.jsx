@@ -1,16 +1,22 @@
 import React, { useEffect, useState } from 'react'
 import { callCreateUser, callDeleteUser, callFetchAllUser, callUpdateUser } from '../../../services/userApi'
-import { Space, Table, Tag, Button, message , Popconfirm , Drawer} from 'antd';
+import { Space, Table, Tag, Button, message , Popconfirm , Drawer, Form , Image, Avatar} from 'antd';
 import ModalAddUser from './modalAddUser/ModalAddUser';
 import { CgKey } from 'react-icons/cg';
 import DrawerViewDetailUser from './drawerViewDetailUser/DrawerViewDetailUser';
 import ModalUpdateUser from './modalUpdateUser/ModalUpdateUser';
+import { AiOutlineUsergroupDelete } from 'react-icons/ai';
+import { UserOutlined } from '@ant-design/icons';
+
 
 
 const AdminUser = () => {
+  const [form] = Form.useForm()
+
   useEffect(() => {
     fetchAllUser()
   }, [])
+
   const [allUser, setAllUser] = useState([])
   const fetchAllUser = async () => {
     const res = await callFetchAllUser()
@@ -25,7 +31,13 @@ const AdminUser = () => {
       render: (text) => <a>{text}</a>,
     },
     {
-      title: 'Name',
+      title: 'Ảnh đại diện',
+      dataIndex: 'avatar',
+      key: 'avatar',
+      render: (text)=> <Avatar src={text} icon={<UserOutlined /> }  style={{width:'50px', height:'50px', borderRadius:'50%'}} alt="" />
+    },
+    {
+      title: 'Tên ',
       dataIndex: 'name',
       key: 'name',
     },
@@ -35,12 +47,12 @@ const AdminUser = () => {
       key: 'email',
     },
     {
-      title: 'Phone',
+      title: 'Số điện thoại',
       dataIndex: 'phone',
       key: 'phone',
     },
     {
-      title: 'Role',
+      title: 'Quyền',
       dataIndex: 'isAdmin',
       render: (text) => <div>
         {text === true ? <Tag color='green'>Admin</Tag> : <Tag color='blue'>User</Tag>}
@@ -48,99 +60,107 @@ const AdminUser = () => {
     },
 
     {
-      title: 'Action',
+      title: 'Hành động',
       key: 'action',
       render: (_, record) => (
         <Space size="middle">
-          <Button onClick={()=>{showModalUpdateUser() , setDataUpdateUser(record) , console.log('record update user' , record)}}>Update</Button>
+          <Button onClick={()=>{showModalUpdateUser() , setDataUpdateUser(record) , console.log('record update user' , record)}}>Cập nhật</Button>
           <Popconfirm
-            title="Delete the task"
-            description="Are you sure to delete this task?"
+            title="Xoá tài khoản"
+            description="Bạn chắc chắn muốn xoá tài khoản này?"
             onConfirm={handleConfirmDeleteUser}
             // onCancel={console.log('no')}
             okText="Yes"
             cancelText="No"
           >
-            <Button onClick={()=>{setDataDeleteUser(record) , console.log(record)}} danger>Delete</Button>
+            <Button onClick={()=>{setDataDeleteUser(record) , console.log(record)}} danger>Xoá</Button>
           </Popconfirm>
-          <Button onClick={()=>{setDataViewDetail(record)  ,showDrawer() , console.log(record)}}>View Detail</Button>
+          <Button onClick={()=>{setDataViewDetail(record)  ,showDrawer() , console.log(record)}}>Xem chi tiết</Button>
         </Space>
       ),
     },
   ];
 
   // ---create user ---
-  const [isModalOpenAddUser, setIsModalOpenAddUser] = useState(false);
-  const handleCancelModalAddUser = ()=>{
-    setIsModalOpenAddUser(false)
+  const [modalAddUser, setModalAddUser] = useState(false);
+  const showModalAddUser = () => {
+    setModalAddUser(true)
   }
   const handleSubmitAddProduct = async (values) => {
     const { email, name, password, phone } = values
     const res = await callCreateUser(values)
-    console.log(res)
     if (res) {
       message.success('Tạo tài khoản thành công')
-      setIsModalOpenAddUser(false)
+      setModalAddUser(false)
       fetchAllUser()
-      clearInterval(values)
     }else{
       message.error('lỗi')
+      setModalAddUser(false)
     }
   }
-
-  //---delete user---
-  const [dataDeleteUser, setDataDeleteUser] = useState({})
-  const handleConfirmDeleteUser = async() => {
-    const _id = dataDeleteUser._id
-    const res = await callDeleteUser(_id)
-    if(res){
-      message.success('Xoá tài khoản thành công')
-      fetchAllUser()
-    }else{
-      message.error('xoá tài khoản thất bại')
-    }
-  }
-
-  //--view detail -- 
-  const [ dataViewDetail,setDataViewDetail ] = useState({})
-  const [openDrawerViewDetail, setOpenDrawerViewDetail] = useState(false);
-  const showDrawer = () => {
-    setOpenDrawerViewDetail(true);
-  };
 
   // --update user--
-  const [isOpenModalUpdateUser , setIsOpenModalUpdateUser] = useState(false)
+  const [modalUpdateUser , setModalUpdateUser] = useState(false)
   const [dataUpdateUser , setDataUpdateUser] = useState({})
  const showModalUpdateUser = () => {
-  setIsOpenModalUpdateUser(true)
+  setModalUpdateUser(true)
  }
- const handleCancelModalUpdateUser = () => {
-  setIsOpenModalUpdateUser(false)
- }
+
  const handleSubmitUpdateProduct = async(values) => {
-  const {_id , email , name , phone} =values
+  const {id , email , name , phone} =values
   const res = await callUpdateUser(values)
   if(res){
+    console.log('check res update user :' , res)
     message.success('Cập nhật tài khoản thành công')
-    setIsOpenModalUpdateUser(false)
+    setModalUpdateUser(false)
     fetchAllUser()
   }else{
     message.error('Đã có lỗi xảy ra')
   }
  }
-  
+
+   //---delete user---
+   const [dataDeleteUser, setDataDeleteUser] = useState({})
+   const handleConfirmDeleteUser = async() => {
+     const _id = dataDeleteUser._id
+     const res = await callDeleteUser(_id)
+     if(res){
+       message.success('Xoá tài khoản thành công')
+       fetchAllUser()
+     }else{
+       message.error('xoá tài khoản thất bại')
+     }
+   }
+ 
+   //--view detail -- 
+   const [ dataViewDetail,setDataViewDetail ] = useState({})
+   const [openDrawerViewDetail, setOpenDrawerViewDetail] = useState(false);
+   const showDrawer = () => {
+     setOpenDrawerViewDetail(true);
+   };
+
   
 
   return (
     <div>
+    
       <DrawerViewDetailUser dataViewDetail={dataViewDetail} openDrawerViewDetail={openDrawerViewDetail} setOpenDrawerViewDetail={setOpenDrawerViewDetail}/>
 
-      <ModalAddUser  isModalOpenAddUser={isModalOpenAddUser} setIsOpenModalAddUser={setIsModalOpenAddUser} handleSubmitAddProduct={handleSubmitAddProduct} handleCancelModalAddUser={handleCancelModalAddUser} />
+      <ModalAddUser
+        modalAddUser={modalAddUser}
+        setModalAddUser={setModalAddUser} 
+        handleSubmitAddProduct={handleSubmitAddProduct} 
+      />
 
-      <ModalUpdateUser handleCancelModalUpdateUser={handleCancelModalUpdateUser} showModalUpdateUser={showModalUpdateUser} isOpenModalUpdateUser={isOpenModalUpdateUser} setIsModalOpenUpdateUser={setIsOpenModalUpdateUser} dataUpdateUser={dataUpdateUser} handleSubmitUpdateProduct={handleSubmitUpdateProduct}/>
+      <ModalUpdateUser  
+        modalUpdateUser={modalUpdateUser} 
+       setModalUpdateUser={setModalUpdateUser} 
+        dataUpdateUser={dataUpdateUser} 
+        setDataUpdateUser={setDataUpdateUser} 
+        handleSubmitUpdateProduct={handleSubmitUpdateProduct}/>
       
       <div style={{ paddingBottom: '10px' }}>
-        <Button onClick={() => { setIsModalOpenAddUser(true) }} >Create User</Button>
+        <Button onClick={showModalAddUser} >Tạo tài khoản</Button>
         <Button style={{ marginLeft: '10px' }}>Export Excel</Button>
       </div>
       <Table columns={columns} dataSource={allUser} />

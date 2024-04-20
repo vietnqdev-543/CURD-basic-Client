@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import { Tabs , Modal } from 'antd';
 import UpdateInfo from './UpdateInfo'
 import UpdatePassword from './UpdatePassword';
+
 const UpdateUser = ({isModalOpen , setIsModalOpen}) => {
     const onChange = (key) => {
         console.log(key);
@@ -18,6 +19,7 @@ const UpdateUser = ({isModalOpen , setIsModalOpen}) => {
           label: 'Đổi mật khẩu',
           children: <UpdatePassword setIsModalOpen={setIsModalOpen} />,
         },
+      
       ];
 
     

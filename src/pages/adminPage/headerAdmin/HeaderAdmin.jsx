@@ -10,6 +10,7 @@ import { doLogoutAction } from '../../../redux/account/acccountSlice';
 
 const HeaderAdmin = () => {
     const username = useSelector(state =>  state.account.user.name)
+    const avatar = useSelector(state => state.account.user.avatar)
     const navigate = useNavigate()
     const dispath = useDispatch()
     const handleLogout = async() => {
@@ -50,9 +51,9 @@ const HeaderAdmin = () => {
             <h2>admin dashboard</h2>
         </Col>
         <Col className='right' style={{backgroundColor:'#f6f6f6' , width:'85%', display:'flex', alignItems:'center', justifyContent:'flex-end'}}>
-            <div style={{padding:'0 20px' , display:'flex'}}>
+            <div style={{padding:'0 20px' , display:'flex' , alignItems:'center'}}>
                 <div style={{padding:'0 5px'}}>
-                    <Avatar src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRiB_hwnr2qi68_5lIrxK6fE74AlsQemoqOQw&s' icon={<UserOutlined />} />  
+                    <Avatar src={avatar} icon={<UserOutlined />} />  
                 </div>  
                 <Dropdown
     menu={{
