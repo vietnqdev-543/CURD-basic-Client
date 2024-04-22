@@ -1,5 +1,6 @@
 import { combineReducers, configureStore } from '@reduxjs/toolkit';
 import accountReducer from './account/acccountSlice';
+import orderReducer from './order/orderSlice'
 import {
   persistStore,
   persistReducer,
@@ -18,11 +19,13 @@ import storage from 'redux-persist/lib/storage'
 const persistConfig = {
   key: 'root',
   storage :storage ,
-  whitelist : ['account' ] 
+  whitelist : ['account' ] ,
+  // blacklist : ['account']
 }
 
 const rootReducer = combineReducers({
-  account : accountReducer , 
+  account : accountReducer ,
+  order : orderReducer , 
 })
 const persistedReducer = persistReducer(persistConfig, rootReducer)
 

@@ -23,6 +23,7 @@ import Footer from './pages/footerPage/Footer'
 import HomePage from './pages/homePage/HomePage';
 import {useSelector} from 'react-redux'
 import ContactPage from './pages/contactPage/ContactPage';
+import Cart from './pages/cartPage/Cart';
 
 function App() {
   const style = {margin : '0 40px'}
@@ -51,7 +52,8 @@ function App() {
         {path : '/register' , element : <RegisterPage />} ,
         {path : `product/:slug` ,element: <ProductDetail />} ,
         {path : '/blog' , element : <Blog />} ,
-        {path : '/contact' , element: <ContactPage />}
+        {path : '/contact' , element: <ContactPage />},
+        {path:'/cart' , element: <Cart/>}
       ]
       
     },

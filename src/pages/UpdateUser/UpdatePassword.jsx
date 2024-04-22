@@ -85,7 +85,7 @@ const UpdatePassword = ({setIsModalOpen}) => {
         },
       ]}
     >
-      <Input placeholder='Nhập mật khẩu hiện tại của bạn'/>
+      <Input.Password placeholder='Nhập mật khẩu hiện tại của bạn'/>
     </Form.Item>
 
     <Form.Item
@@ -97,7 +97,7 @@ const UpdatePassword = ({setIsModalOpen}) => {
         },
       ]}
     >
-      <Input placeholder='Nhập mật khẩu mới của bạn'/>
+      <Input.Password placeholder='Nhập mật khẩu mới của bạn'/>
     </Form.Item>
 
 

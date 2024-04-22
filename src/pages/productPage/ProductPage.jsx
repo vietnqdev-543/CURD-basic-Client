@@ -52,6 +52,7 @@ const ProductPage = () => {
     const fetchProducts = async () => {
       try {
         const res = await callFetchAllProduct();
+        console.log('allProduct : ' , res.data)
         if (res.data) {
           setLoading(true)
             setListProduct(res.data);

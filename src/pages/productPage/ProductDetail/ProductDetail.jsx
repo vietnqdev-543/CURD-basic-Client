@@ -1,4 +1,4 @@
-import { Row, Col , Skeleton , Space} from 'antd'
+import { Row, Col , Skeleton , Space, message} from 'antd'
 import ImageGallery from "react-image-gallery";
 import "react-image-gallery/styles/css/image-gallery.css";
 import './style.scss'
@@ -49,7 +49,11 @@ const ProductDetail = ({}) => {
   //count product
   const [countProduct , setCountProduct] = useState(1)
   const handleAddCount = () => {
-    setCountProduct(pre => pre + 1)
+    if(countProduct < dataProduct.quantity){
+      setCountProduct(pre => pre + 1)
+    }else{
+      message.info(`Số lượng sản phẩm tạm có là ${dataProduct.quantity}`)
+    }
   }
   const handleRemoveCount = () => {
     if (countProduct > 1) {
@@ -61,7 +65,7 @@ const ProductDetail = ({}) => {
   <div style={{ width: '100%', minHeight: '100vh' }}>
     {Object.keys(dataProduct).length !== 0 ? (
       <Row className='productDetail-container'>
-        <Col className='left' span={12}>
+        <Col className='left' span={10}>
           <ImageGallery items={images} showPlayButton={false} // Ẩn nút phát
             showFullscreenButton={false} // Ẩn nút toàn màn hình
             renderLeftNav={() => <></>} // Mũi tên trái === <> </>
@@ -69,7 +73,7 @@ const ProductDetail = ({}) => {
             slideOnThumbnailOver={true}  // Di chuột qua thumbnail => tự động cuộn ảnh
           />
         </Col>
-        <Col className='right' span={12}>
+        <Col className='right' span={14}>
           <div className="brand">{dataProduct.brand}</div>
           <div className="name">{dataProduct.name}</div>
           <div className='middle'>
@@ -93,7 +97,7 @@ const ProductDetail = ({}) => {
 
           <Row gutter={12}>
             <Col span={12}>
-              <button className='btn-addCart' style={{ width: '100%', padding: '18px 0', border: 'none', backgroundColor: 'darkRed', color: 'white', borderRadius: '5px', fontSize: '18px' }}>Thêm vào giỏ hàng</button>
+              <button className='btn-addCart' style={{ width: '100%', padding: '18px 0', border: 'none', backgroundColor: 'darkRed', color: 'white', borderRadius: '5px', fontSize: '18px' }}> Thêm vào giỏ hàng</button>
             </Col>
             <Col span={12}>
               <button className='btn-buy' style={{ width: '100%', padding: '18px 0', border: 'none', backgroundColor: 'darkBlue', color: 'white', borderRadius: '5px', fontSize: '18px' }}>Mua ngay</button>
