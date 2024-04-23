@@ -1,30 +1,33 @@
-import { Avatar, Divider, Dropdown, Space, message, Badge } from 'antd'
-import './style.scss'
-import { UserOutlined } from '@ant-design/icons';
-import { DownOutlined, SmileOutlined, ShoppingCartOutlined } from '@ant-design/icons';
-import { useDispatch, useSelector } from 'react-redux';
-import { callLogoutUser } from '../../services/userApi';
-import { useNavigate } from 'react-router-dom';
-import { doLogoutAction } from '../../redux/account/acccountSlice';
-import UpdateUser from '../UpdateUser/UpdateUser';
-import { useState } from 'react';
-import CartDrawer from '../cartPage/CartDrawer';
+import { Avatar, Dropdown, Space, message, Badge } from "antd";
+import "./style.scss";
+import { UserOutlined } from "@ant-design/icons";
+import {
+  DownOutlined,
+  ShoppingCartOutlined,
+} from "@ant-design/icons";
+import { useDispatch, useSelector } from "react-redux";
+import { callLogoutUser } from "../../services/userApi";
+import { useNavigate } from "react-router-dom";
+import { doLogoutAction } from "../../redux/account/acccountSlice";
+import UpdateUser from "../UpdateUser/UpdateUser";
+import { useState } from "react";
 
 const Header = () => {
-  const isLogin = useSelector(state => state.account.isLogin)
-  const userName = useSelector(state => state.account.user.name)
-  const isAdmin = useSelector(state => state.account.user.isAdmin)
-  const avatar = useSelector(state => state.account.user.avatar)
-  const navigate = useNavigate()
-  const dispath = useDispatch()
-  const handleLogout = async () => {
-    const res = await callLogoutUser()
-    console.log(res)
-    dispath(doLogoutAction())
-    message.success('Đăng xuất thành công')
-    navigate('/')
+  const isLogin = useSelector((state) => state.account.isLogin);
+  const userName = useSelector((state) => state.account.user.name);
+  const isAdmin = useSelector((state) => state.account.user.isAdmin);
+  const avatar = useSelector((state) => state.account.user.avatar);
+  const carts = useSelector((state) => state.order.carts);
 
-  }
+  const navigate = useNavigate();
+  const dispath = useDispatch();
+  const handleLogout = async () => {
+    const res = await callLogoutUser();
+    console.log(res);
+    dispath(doLogoutAction());
+    message.success("Đăng xuất thành công");
+    navigate("/");
+  };
 
   //update user
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -32,52 +35,43 @@ const Header = () => {
     setIsModalOpen(true);
   };
 
-
   const items = [
-    isAdmin ?
-      {
-        key: '1',
-        label: (
-          <div onClick={() => navigate('./admin')}>Trang Admin</div>
-        ),
-      } : null,
+    isAdmin
+      ? {
+          key: "1",
+          label: <div onClick={() => navigate("./admin")}>Trang Admin</div>,
+        }
+      : null,
     {
-      key: '2',
-      label: (
-        <div onClick={() => showModal()}>Quản lí tài khoản</div>
-      ),
+      key: "2",
+      label: <div onClick={() => showModal()}>Quản lí tài khoản</div>,
     },
     {
-      key: '3',
-      label: (
-        <div onClick={() => handleLogout()}>Đăng xuất</div>
-      ),
+      key: "3",
+      label: <div onClick={() => handleLogout()}>Đăng xuất</div>,
     },
-
   ];
 
-
-  const [openDrawer , setOpenDrawer]  = useState(false)
-  const showDrawer = () => {
-    setOpenDrawer(true)
-  }
   const handleNavigateCart = () => {
-    navigate('/cart')
-  }
+    navigate("/cart");
+  };
 
-  return (  
-
+  return (
     <div>
-      <CartDrawer  openDrawer={openDrawer} setOpenDrawer={setOpenDrawer} />
       <UpdateUser isModalOpen={isModalOpen} setIsModalOpen={setIsModalOpen} />
       <div className="header-container">
         <div className="header-top">
-          <div className='nameBrand'>HorizonHours</div>
+          <div className="nameBrand">HorizonHours</div>
           <div className="cart">
-            <Badge count={5}>
-              <span onClick={handleNavigateCart} style={{ fontSize: '27px', padding: '0 10px' }}><ShoppingCartOutlined /></span>
+            <Badge showZero count={carts.length}>
+              <span
+                onClick={handleNavigateCart}
+                style={{ fontSize: "27px", padding: "0 10px" }}
+              >
+                <ShoppingCartOutlined />
+              </span>
             </Badge>
-            {isLogin ?
+            {isLogin ? (
               <Dropdown
                 menu={{
                   items,
@@ -86,23 +80,25 @@ const Header = () => {
                 <a onClick={(e) => e.preventDefault()}>
                   <Space>
                     <div className="userName">
-                      <div className='logo'>
-                        <Avatar src={avatar} size="medium" icon={<UserOutlined />} />
+                      <div className="logo">
+                        <Avatar
+                          src={avatar}
+                          size="medium"
+                          icon={<UserOutlined />}
+                        />
                       </div>
-                      <div className='name'>{userName}</div>
+                      <div className="name">{userName}</div>
                       <DownOutlined />
                     </div>
                   </Space>
                 </a>
               </Dropdown>
-
-              :
-              <div className='link'>
+            ) : (
+              <div className="link">
                 <a href="/login">Login</a>
                 <a href="/register">Register</a>
               </div>
-
-            }
+            )}
           </div>
         </div>
         <div className="header-nav">
@@ -114,8 +110,7 @@ const Header = () => {
         </div>
       </div>
     </div>
+  );
+};
 
-  )
-}
-
-export default Header
+export default Header;

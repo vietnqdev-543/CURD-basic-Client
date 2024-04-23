@@ -1,4 +1,4 @@
-import { Row, Col , Skeleton , Space, message} from 'antd'
+import { Row, Col , message} from 'antd'
 import ImageGallery from "react-image-gallery";
 import "react-image-gallery/styles/css/image-gallery.css";
 import './style.scss'
@@ -7,22 +7,26 @@ import { useEffect, useState } from 'react';
 import {useLocation} from 'react-router-dom'
 import { callFetchProductById } from '../../../services/productApi';
 import SkeletonComponent from '../../../components/skeleton/SkeletonComponent';
+import { doCreateCartProduct } from '../../../redux/order/orderSlice';
+import { useDispatch } from 'react-redux';
 
 
 
-const ProductDetail = ({}) => {
+const ProductDetail = () => {
   const [dataProduct , setDataProduct] =useState({})
   const location =useLocation()
   const id = location.pathname.split('/').pop();
+  const dispatch = useDispatch()
    useEffect(() => {
     fetchProductById(id);
   },[id])
 
   const fetchProductById = async(id) => {
-    // console.log('check' , id);
+     console.log('check' , id);
     try {
       const res =  await callFetchProductById(id);
       if (res && res.data) {
+         console.log(res.data)
         setTimeout(()=>{
           setDataProduct(res.data.data);
         },[1000])
@@ -39,6 +43,7 @@ const ProductDetail = ({}) => {
       originalClass: 'originalClass'
     },
     ...(dataProduct.slider ? dataProduct.slider.map((item, index) => ({
+      key : index ,
       original: item,
       thumbnail: item,
       originalClass: 'originalClass'
@@ -60,6 +65,11 @@ const ProductDetail = ({}) => {
       setCountProduct(pre => pre - 1)
     }
   }
+
+  const handleAddToCart = (quantity, dataProduct) => {
+    dispatch(doCreateCartProduct({quantity , detail :dataProduct , _id : dataProduct._id}));
+    setCountProduct(1)
+  }
   
   return (
   <div style={{ width: '100%', minHeight: '100vh' }}>
@@ -77,6 +87,7 @@ const ProductDetail = ({}) => {
           <div className="brand">{dataProduct.brand}</div>
           <div className="name">{dataProduct.name}</div>
           <div className='middle'>
+            <div>id : {dataProduct._id  }</div>
             <div className="object"> <span>Đối tượng :</span> {dataProduct.sex}</div>
             <div className="size"><span>Kích cỡ :</span> {dataProduct.size}</div>
             <div className="waterproof"><span>Kháng nước :</span> {dataProduct.waterproof ? "Có" : "Không"}</div>
@@ -97,7 +108,7 @@ const ProductDetail = ({}) => {
 
           <Row gutter={12}>
             <Col span={12}>
-              <button className='btn-addCart' style={{ width: '100%', padding: '18px 0', border: 'none', backgroundColor: 'darkRed', color: 'white', borderRadius: '5px', fontSize: '18px' }}> Thêm vào giỏ hàng</button>
+              <button onClick={()=>{handleAddToCart(countProduct , dataProduct)}} className='btn-addCart' style={{ width: '100%', padding: '18px 0', border: 'none', backgroundColor: 'darkRed', color: 'white', borderRadius: '5px', fontSize: '18px' }}> Thêm vào giỏ hàng</button>
             </Col>
             <Col span={12}>
               <button className='btn-buy' style={{ width: '100%', padding: '18px 0', border: 'none', backgroundColor: 'darkBlue', color: 'white', borderRadius: '5px', fontSize: '18px' }}>Mua ngay</button>

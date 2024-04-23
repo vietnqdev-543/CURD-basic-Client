@@ -1,6 +1,6 @@
-import React, { useState } from 'react'
+import  { useState } from 'react'
 import './style.scss'
-import { Button, Checkbox, Col, Divider, Input, Row, Steps } from 'antd';
+import { Checkbox, Col, Divider,  Row, Steps } from 'antd';
 const Cart = () => {
     const [quantity , setQuantity] = useState(1)
     const handleIncreaseQuantity = () => {
@@ -15,7 +15,7 @@ const Cart = () => {
         <div className='cart-container'>
             <Row gutter={20}>
                 <Col className='left' span={18}>
-                    <Row style={{ margin:0,display:'flex', alignItems:'center' , justifyContent:'space-between' , padding:'20px 40px 0 40px'}}>
+                    {/* <Row style={{ margin:0,display:'flex', alignItems:'center' , justifyContent:'space-between' , padding:'20px 40px 0 40px'}}>
                         <Col span={11}>Sản phẩm</Col>
                         <div>Số lượng</div>
                         <div>Giá tiền</div>
@@ -23,9 +23,9 @@ const Cart = () => {
                     </Row>
                     <div style={{padding:'0 5px'}}> 
                         <Divider />
-                     </div>
+                     </div> */}
                     <div className="item-cart">
-                        <Col span={11} style={{display:'flex', alignItems:'center'}}>
+                        <Col span={8} style={{display:'flex', alignItems:'center'}}>
                             <Checkbox></Checkbox>
                             <img src='https://image.donghohaitrieu.com/wp-content/uploads/2023/09/EFR-526L-1AVUDF-1.jpg' alt="" className='image' />
                             <div style={{display:'flex',alignItems:'flex-start', flexDirection:'column', padding:'5px', gap:'10px' , cursor:'default'}}>
@@ -34,11 +34,15 @@ const Cart = () => {
                             </div>
                         </Col>
 
-                        <div className="quantity">
-                            <button onClick={handleReduceQuantity}>-</button>
+                      <div style={{display:'flex' , gap:'10px' , justifyContent:'center'}}>
+                      <div className="quantity">
+                           <button onClick={handleReduceQuantity}>-</button>
                             <span>{quantity}</span>
-                            <button onClick={handleIncreaseQuantity}>+</button>
+                            <button onClick={handleIncreaseQuantity}>+</button>     
                         </div>
+                        <div>Số lượng còn lại: 10</div>
+                      </div>
+                        
 
                       <div style={{display:'flex', gap:'100px'}}>
                         <div className="price">
@@ -51,33 +55,7 @@ const Cart = () => {
 
                     </div>
                       <Divider />
-                      <div className="item-cart">
-                        <Col span={11} style={{display:'flex', alignItems:'center'}}>
-                            <Checkbox></Checkbox>
-                            <img src='https://image.donghohaitrieu.com/wp-content/uploads/2023/09/EFR-526L-1AVUDF-1.jpg' alt="" className='image' />
-                            <div style={{display:'flex',alignItems:'flex-start', flexDirection:'column', padding:'5px', gap:'10px' , cursor:'default'}}>
-                                <span className='name'>Casio EFR-526L-1AVUDF</span>
-                                <span>Remove</span>
-                            </div>
-                        </Col>
-
-                        <div className="quantity">
-                            <button onClick={handleReduceQuantity}>-</button>
-                            <span>{quantity}</span>
-                            <button onClick={handleIncreaseQuantity}>+</button>
-                        </div>
-
-                      <div style={{display:'flex', gap:'100px'}}>
-                        <div className="price">
-                                <span>1.100.000 vnđ</span>
-                            </div>
-                            <div className='totalPrice'>
-                                <span>1.100.000 vnđ</span>
-                            </div>
-                      </div>
-
-                    </div>
-                      <Divider />
+                   
                 </Col>
                 <Col className='right' span={6}>
                     <Col className='pay' span={24}>

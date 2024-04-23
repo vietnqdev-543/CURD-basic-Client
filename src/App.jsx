@@ -27,7 +27,7 @@ import Cart from './pages/cartPage/Cart';
 
 function App() {
   const style = {margin : '0 40px'}
-  const isLogin = useSelector(state=>state.account.isLogin)
+  const isLogin = useSelector(state=>state.account.isLogin) 
   const Layout = () => {
     return(
       <>
@@ -35,8 +35,8 @@ function App() {
       <Header />
       <div style={style}>
       <Outlet />
-      {isLogin ? <Footer /> : null }
       </div>
+      <Footer />
       </>
     )
   }
