@@ -8,7 +8,7 @@ import {useLocation} from 'react-router-dom'
 import { callFetchProductById } from '../../../services/productApi';
 import SkeletonComponent from '../../../components/skeleton/SkeletonComponent';
 import { doCreateCartProduct } from '../../../redux/order/orderSlice';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 
 
@@ -16,6 +16,7 @@ const ProductDetail = () => {
   const [dataProduct , setDataProduct] =useState({})
   const location =useLocation()
   const id = location.pathname.split('/').pop();
+  const userId = useSelector(state => state.account.user._id)
   const dispatch = useDispatch()
    useEffect(() => {
     fetchProductById(id);
@@ -67,7 +68,7 @@ const ProductDetail = () => {
   }
 
   const handleAddToCart = (quantity, dataProduct) => {
-    dispatch(doCreateCartProduct({quantity , detail :dataProduct , _id : dataProduct._id}));
+    dispatch(doCreateCartProduct({ userId : userId,quantity , detail :dataProduct , _id : dataProduct._id}));
     setCountProduct(1)
   }
   

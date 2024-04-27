@@ -48,6 +48,10 @@ const Header = () => {
     },
     {
       key: "3",
+      label: <div onClick={() => navigate('/orderManager')}>Quản lí đơn hàng</div>,
+    },
+    {
+      key: "4",
       label: <div onClick={() => handleLogout()}>Đăng xuất</div>,
     },
   ];

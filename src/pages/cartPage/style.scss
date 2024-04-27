@@ -2,23 +2,14 @@
     width: 100%;
     min-height: 80vh;
     margin-bottom: 10px;
-    
-    // .steps{
-    //     width: 100%;
-    //     padding: 30px 30px;
-    //     background-color: #fff8f8;
-    //     border-radius: 10px;
-    // }
     .left{
-      
-        height: 100vh;
+        height: 10% ;
         border: 1px solid rgb(239, 235, 235);
         border-radius: 5px;
         .item-cart{
             margin: 20px 0;
             width: 100%;
             height: auto;
-            // background-color: #f1f2f5;
             padding: 10px 30px;
             border-radius: 10px;
             display: flex;
@@ -26,21 +17,35 @@
             align-items: center;
             .image{
                 width: auto;
-                height: 60px;
+                height: 80px;
+                padding: 0 10px;
+            }
+            .name{
+                font-size: 16px;
+            }
+            .delete-item{
+                color: black;
+                font-weight: bold;
+                font-size: 15px;
+            }.delete-item:hover{
+                color: red;
+                transition: 0.7;
             }
             .quantity{
                 display: flex;
                 justify-content: space-between;
                 align-items: center;
-                border: 1px solid black;
-                padding: 1px 8px;
-                gap: 20px;
+                // border: 1px solid black;
+                padding: 1px 10px;
+                gap: 10px;
                 font-size: 15px;
                 cursor: default;
                 button{
-                    border: none;
-                    padding: 10px;
+                 
+                    padding: 3px 7px;
                     background-color: white;
+                    border: 1px solid black;
+                    border-radius: 2px;
                 }
                
             } 
@@ -50,6 +55,8 @@
             color: darkRed;
             font-size: 15px;
         }
+
+   
 
     }
     .right{   
@@ -61,5 +68,13 @@
             height: auto;
             padding: 20px 30px;
         }
+
+     
     }
 }
+
+.input{
+    height: 40px;
+    
+}
+

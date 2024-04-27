@@ -12,7 +12,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
   theme={{
     token: {
       // Seed Token
-      // colorPrimary: 'black',
+      colorPrimary: 'darkred',
       borderRadius: 5,
 
       // Alias Token

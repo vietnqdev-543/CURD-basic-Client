@@ -24,6 +24,8 @@ import HomePage from './pages/homePage/HomePage';
 import {useSelector} from 'react-redux'
 import ContactPage from './pages/contactPage/ContactPage';
 import Cart from './pages/cartPage/Cart';
+import SuccesfullyOrder from './components/successfullyOrder/SuccesfullyOrder';
+import OrderManager from './pages/cartPage/orderManager/OrderManager';
 
 function App() {
   const style = {margin : '0 40px'}
@@ -53,7 +55,9 @@ function App() {
         {path : `product/:slug` ,element: <ProductDetail />} ,
         {path : '/blog' , element : <Blog />} ,
         {path : '/contact' , element: <ContactPage />},
-        {path:'/cart' , element: <Cart/>}
+        {path:'/cart' , element: <Cart/>} ,
+        {path:'/sucessfullyOrder' , element : <SuccesfullyOrder />},
+        {path : '/orderManager' , element: <OrderManager />}
       ]
       
     },
