@@ -9,6 +9,7 @@ import {
   Button,
   Form,
   Input,
+  message,
 } from "antd";
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -21,11 +22,12 @@ import { useNavigate } from "react-router-dom";
 import SuccesfullyOrder from "../../components/successfullyOrder/SuccesfullyOrder";
 
 const Cart = () => {
-  const dispatch = useDispatch();
+  const dispatch = useDispatch();       
   const navigate = useNavigate()
   const [dataCart, setDataCart] = useState([]);
   const cartsList = useSelector((state) => state.order.carts);
   const userId = useSelector(state => state.account.user._id)
+  const isLogin = useSelector(state => state.account.isLogin)
   useEffect(() => {
     setDataCart(cartsList);
     console.log(cartsList);
@@ -52,10 +54,16 @@ const Cart = () => {
   };
 
   const onFinish = async(values) => {
+    if(!isLogin){
+      message.info('Bạn chưa đăng nhập , vui lòng đăng nhập để đặt hàng') 
+      return
+    }
     const detailProduct = dataCart.map((item)=>{
     return {
+      idProduct : item.detail._id,
       nameProduct :item.detail.name ,
-      quantity : item.detail.quantity ,
+      quantity : item.quantity ,
+      image : item.detail.image ,
       price : item.detail.price
     }
     })

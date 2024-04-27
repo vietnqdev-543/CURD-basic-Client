@@ -22,6 +22,3 @@ export const callHandleUploadFile = (values)=> {
   return axios.post('http://localhost:3003/product/uploadFile' , values)
 }
 
-export const callGetImage = () => {
-  return axios.get('http://localhost:3003/image/getImage')
-}

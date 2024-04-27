@@ -11,6 +11,7 @@ import { useNavigate } from "react-router-dom";
 import { doLogoutAction } from "../../redux/account/acccountSlice";
 import UpdateUser from "../UpdateUser/UpdateUser";
 import { useState } from "react";
+import { FaRegUserCircle } from "react-icons/fa";
 
 const Header = () => {
   const isLogin = useSelector((state) => state.account.isLogin);
@@ -48,7 +49,7 @@ const Header = () => {
     },
     {
       key: "3",
-      label: <div onClick={() => navigate('/orderManager')}>Quản lí đơn hàng</div>,
+      label: <div onClick={() => navigate('/orderManager')}>Đơn hàng của tôi</div>,
     },
     {
       key: "4",
