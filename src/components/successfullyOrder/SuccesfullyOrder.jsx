@@ -11,12 +11,12 @@ const SuccesfullyOrder = () => {
         extra={[
           <Button
             onClick={() => {
-              navigate("/");
+              navigate("/orderManager");
             }}
             type="primary"
             key="console"
           >
-            Về trang chủ
+            Xem đơn hàng
           </Button>,
           <Button
             onClick={() => {

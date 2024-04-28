@@ -50,12 +50,32 @@ const AdminOrder = () => {
       dataIndex: 'paymentMethod',
     },
     {
+      title: 'Trạng thái',
+      dataIndex: 'status',
+      key: 'status',
+      render: (text, record, index) => {
+        switch(text) {
+          case 'confirm':
+            return <Tag color="cyan">Đã xác nhận</Tag>;
+          case 'shipping':
+            return <Tag color="orange">Đã vận chuyển</Tag>;
+          case 'succé':
+            return <Tag color="green">Giao thành công</Tag>;
+          case 'cancel':
+            return <Tag color="red">Đã huỷ</Tag>;
+          default:
+            return null;
+        }
+      }
+    },
+    {
       title: 'Hành động',
       key:5 ,
       render: (text, record, index) => {
         return (
           <div> 
             <Space size="middle">
+              <Button onClick={()=>{ setDataViewOrder(record) , handleOpenDrawer() }} >Cập nhật trạng thái</Button>
               <Button onClick={()=>{ setDataViewOrder(record) , handleOpenDrawer() }} >Xem chi tiết</Button>
             </Space>
           </div>
@@ -69,6 +89,8 @@ const AdminOrder = () => {
   const handleOpenDrawer = () => {
     setOpenDrawer(true)
   }
+
+ 
   
   
   return (

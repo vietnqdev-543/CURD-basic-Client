@@ -87,9 +87,9 @@ const Cart = () => {
         <Col span={2}></Col>
         <Col className="left" span={14}>
           {dataCart.length === 0 ? (
-            <>
-              <Empty image={Empty.PRESENTED_IMAGE_SIMPLE} />
-            </>
+            <div style={{paddingTop:'20%'}}>
+              <Empty image={Empty.PRESENTED_IMAGE_SIMPLE} description='Chưa có sản phẩm' />
+            </div>
           ) : (
             <>
               {dataCart.map((item, index) => {
@@ -183,7 +183,8 @@ const Cart = () => {
               </span>
               <Divider />
             </Row>
-            <Row
+            {/* vouncher */}
+            {/* <Row
               gutter={10}
               style={{
                 display: "flex",
@@ -218,7 +219,7 @@ const Cart = () => {
                 </button>
               </Col>
               <Divider />
-            </Row>
+            </Row> */}
             <Row
               style={{
                 display: "flex",
@@ -227,7 +228,7 @@ const Cart = () => {
                 alignItems: "center",
               }}
             >
-              <span>Tổng tính</span>
+              <span style={{fontWeight:'bold'}}>Tổng tính</span>
               <span
                 style={{
                   color: "darkred",
@@ -242,7 +243,7 @@ const Cart = () => {
               </span>
               <Divider />
             </Row>
-            <h2 style={{ padding: "0 20px 0px 20px" }}>Thông tin người nhận </h2>
+            <h2 style={{ padding: "20px" }}>Thông tin người nhận </h2>
           <div style={{padding:' 0 20px'}}>
           <Form
               name="basic"

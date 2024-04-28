@@ -12,13 +12,15 @@ const formatter = (value) => <CountUp end={value} separator="," />;
 import './style.scss'
 import { callFetchAllCategory } from '../../../services/categoryApi';
 import { TbCategory } from "react-icons/tb";
+import { callfetchAllOrder } from '../../../services/orderApi';
 
 const AdminDashboard = () => {
   const [allUser, setAllUser] = useState([])
   const [allProduct, setAllProduct] = useState([])
   const [allCategory, setAllCategory] = useState([])
+  const [allOrder, setAllOrder] = useState([])
   useEffect(() => {
-    getAllUser(), getAllProduct(), getAllCategory()
+    getAllUser(), getAllProduct(), getAllCategory() , getAllOrder()
   }, [])
   const getAllUser = async () => {
     const res = await callFetchAllUser()
@@ -34,12 +36,17 @@ const AdminDashboard = () => {
     const res = await callFetchAllCategory()
     setAllCategory(res.data.data)
   }
+  const getAllOrder = async() =>{
+    const res = await callfetchAllOrder()
+    console.log('check order :', res.data)
+    setAllOrder(res.data.data)
+  }
   const userName = useSelector(state => state.account.user.name)
   const allArr = [
     { name: 'Accounts', quantity: allUser.length, icon: <MdOutlineAccountCircle />, route: './user' },
     { name: 'Products', quantity: allProduct.length, icon: <FiBox />, route: './product' },
     { name: 'Category', quantity: allCategory.length, icon: <TbCategory />, route: './category' },
-    { name: 'Orders', quantity: 10, icon: <AiOutlineShoppingCart />, route: './order' },
+    { name: 'Orders', quantity: allOrder.length, icon: <AiOutlineShoppingCart />, route: './order' },
   ];
   return (
     <div>
