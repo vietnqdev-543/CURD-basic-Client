@@ -43,10 +43,10 @@ const AdminDashboard = () => {
   }
   const userName = useSelector(state => state.account.user.name)
   const allArr = [
-    { name: 'Accounts', quantity: allUser.length, icon: <MdOutlineAccountCircle />, route: './user' },
-    { name: 'Products', quantity: allProduct.length, icon: <FiBox />, route: './product' },
-    { name: 'Category', quantity: allCategory.length, icon: <TbCategory />, route: './category' },
-    { name: 'Orders', quantity: allOrder.length, icon: <AiOutlineShoppingCart />, route: './order' },
+    { name: 'tài khoản', quantity: allUser.length, icon: <MdOutlineAccountCircle />, route: './user' },
+    { name: 'sản phẩm', quantity: allProduct.length, icon: <FiBox />, route: './product' },
+    { name: 'thương hiệu', quantity: allCategory.length, icon: <TbCategory />, route: './category' },
+    { name: 'đơn hàng', quantity: allOrder.length, icon: <AiOutlineShoppingCart />, route: './order' },
   ];
   return (
     <div>
@@ -59,18 +59,18 @@ const AdminDashboard = () => {
       <div className="dashboard-app">
         {allArr.map((item, index) => {
           return (
-            <div className="item">
+            <div className="item" key={index}>
               <div className='top' style={{ display: 'flex', justifyContent: 'space-between' }}>
                 <div style={{ display: 'flex', flexDirection: 'column' }}>
                   <Statistic className='number' value={item.quantity} formatter={formatter} />
-                  <div className="name">Total {item.name}</div>
+                  <div className="name">Tổng {item.name}</div>
                 </div>
                 <div className='icon'>
                   <span>{item.icon}</span>
                 </div>
               </div>
               <div className="bottom" style={{ color: 'blue', bottom: 0 }} onClick={() => { navigate(item.route) }}>
-                View all {item.name}
+                Xem tất cả {item.name}
               </div>
             </div>
           )

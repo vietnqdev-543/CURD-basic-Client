@@ -1,12 +1,14 @@
 import { useEffect, useState } from "react"
 import { callfetchAllOrder } from "../../../services/orderApi"
-import { Button, Space, Table, Tag } from 'antd'
+import { Button, Space, Table, Tag , Modal } from 'antd'
 import DrawerViewDetailOrder from "./DrawerViewDetailOrder"
+import SetStatusModal from "./SetStatusModal"
 
 
 const AdminOrder = () => {
   const [listOrder , setListOrder] = useState([])
   const [dataViewOrder , setDataViewOrder ] = useState([])
+  const [dataModalSetStatus , setDataModalSetStatus] = useState({})
   useEffect(()=>{
     const fetchAllOrder = async() => {
       const res = await callfetchAllOrder()
@@ -15,7 +17,7 @@ const AdminOrder = () => {
       console.log(listOrder)
     }
   fetchAllOrder()
-  }, [])
+  }, [dataModalSetStatus , listOrder , dataViewOrder])
 
   const columns = [
     {
@@ -58,8 +60,8 @@ const AdminOrder = () => {
           case 'confirm':
             return <Tag color="cyan">Đã xác nhận</Tag>;
           case 'shipping':
-            return <Tag color="orange">Đã vận chuyển</Tag>;
-          case 'succé':
+            return <Tag color="orange">Đang giao hàng</Tag>;
+          case 'succes':
             return <Tag color="green">Giao thành công</Tag>;
           case 'cancel':
             return <Tag color="red">Đã huỷ</Tag>;
@@ -75,7 +77,7 @@ const AdminOrder = () => {
         return (
           <div> 
             <Space size="middle">
-              <Button onClick={()=>{ setDataViewOrder(record) , handleOpenDrawer() }} >Cập nhật trạng thái</Button>
+              <Button onClick={()=>{ setDataModalSetStatus(record),handleShowModal()  }} >Cập nhật trạng thái</Button>
               <Button onClick={()=>{ setDataViewOrder(record) , handleOpenDrawer() }} >Xem chi tiết</Button>
             </Space>
           </div>
@@ -90,12 +92,19 @@ const AdminOrder = () => {
     setOpenDrawer(true)
   }
 
- 
+ //modal set status order
+ const [openModal , setOpenModal]= useState(false)
+
+ const handleShowModal = () => {
+  setOpenModal(true)
+ }
+
   
   
   return (
     <div>
       <DrawerViewDetailOrder setOpenDrawer={setOpenDrawer} openDrawer={openDrawer} dataViewOrder={dataViewOrder} />
+      <SetStatusModal openModal={openModal} setOpenModal={setOpenModal}  dataModalSetStatus={dataModalSetStatus}  setDataModalSetStatus={setDataModalSetStatus} />
       <Table columns={columns} dataSource={listOrder} />
     </div>
   )

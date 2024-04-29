@@ -11,6 +11,6 @@ export const callGetOrderByID = (_id) => {
 export const callCancelOrder = (_id) => {
     return axios.post(`http://localhost:3003/order/cancelOrder/${_id}`)
 }
-export const callSetStatusOrder = (_id) => {
-    return axios.post(`http://localhost:3003/order/setStatusOrder/${_id}`)
+export const callSetStatusOrder = (values) => {
+    return axios.post(`http://localhost:3003/order/setStatusOrder`, values)
 }

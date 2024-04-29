@@ -4,6 +4,8 @@ import { callCancelOrder, callGetOrderByID } from "../../../services/orderApi";
 import { useSelector } from "react-redux";
 import { Divider, Button, Row, message } from "antd";
 import { Empty} from "antd";
+import { FaShippingFast } from "react-icons/fa";
+
 const OrderManager = () => {
   const [listOrder, setListOrder] = useState([]);
   const _id = useSelector((state) => state.account.user._id);
@@ -39,10 +41,10 @@ const OrderManager = () => {
                 <div
                   style={{ color: "grey", fontSize: "20px", marginTop: "10px" }}
                 >
-                  {item.status === "confirm" ? <>Đã xác nhận</> : <></>}
-                  {item.status === "shipping" ? <>Đang vận chuyển</> : <></>}
-                  {item.status === "succes" ? <>Giao hàng thành công</> : <></>}
-                  {item.status === "cancel" ? <>Đã huỷ</> : <></>}
+                  {item.status === "confirm" ? <div style={{color:'darkGreen'}}>Đã xác nhận</div> : <></>}
+                  {item.status === "shipping" ? <div style={{color :'darkGreen', display:'flex', alignItems:'center', gap:'10px'}}> <FaShippingFast /> Đang vận chuyển</div> : <></>}
+                  {item.status === "succes" ? <div style={{color:'darkGreen'}}>Giao hàng thành công</div> : <></>}
+                  {item.status === "cancel" ? <div style={{color:'darkred'}}>Đã huỷ</div> : <></>}
                 </div>
                 <Divider />
                 <div>
