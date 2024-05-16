@@ -25,8 +25,8 @@ const SkeletonComponent = () => {
                 <br /> <br /> <Skeleton paragraph={{rows : 2}} active={true}/> 
                 <br /> <br />
                 <div style={{display: 'flex' , gap : 20 , marginTop:20 , overflow : 'hidden'}}>
-                    <Skeleton.Button active={true} style={{width:300 , height:50}} />
-                    <Skeleton.Button active={true} style={{width:300, height:50}} />
+                    <Skeleton.Button active={true} style={{width:600 , height:50}} />
+                    {/* <Skeleton.Button active={true} style={{width:300, height:50}} /> */}
                 </div>
             </Col>
         </Row>

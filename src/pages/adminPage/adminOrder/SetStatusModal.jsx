@@ -1,6 +1,6 @@
 import { Modal, Select, Form, Input } from "antd";
 import { callSetStatusOrder } from "../../../services/orderApi";
-import { useEffect } from "react";
+import { useEffect , useState } from "react";
 const SetStatusModal = (props) => {
     const {openModal, setOpenModal, dataModalSetStatus , setDataModalSetStatus} = props
     const [form] = Form.useForm();
@@ -15,8 +15,10 @@ const SetStatusModal = (props) => {
       form.resetFields()    
     setOpenModal(false);
   };
+  const [showShipping , setShowShipping] = useState(false)
   const handleChange = (value) => {
     console.log(`selected ${value}`);
+    setShowShipping(value === 'shipping' || value === 'succes')
   };
 
   const onFinish = async (values) => {
@@ -54,6 +56,7 @@ const SetStatusModal = (props) => {
           <Form.Item
             label="ID"
             name="_id"
+            style={{display: 'none'}}
             //   initialValue={dataModalSetStatus._id}
             rules={[
               {
@@ -98,6 +101,16 @@ const SetStatusModal = (props) => {
               ]}
             />
           </Form.Item>
+          {showShipping &&
+              <Form.Item
+              label="Mã vận đơn "
+              name="shippingCode"
+            >
+              <Input />
+            </Form.Item>
+          
+             }
+      
         </Form>
       </Modal>
     </div>

@@ -1,17 +1,35 @@
 
-import {  Descriptions, Divider, Drawer } from 'antd';
+import {  Descriptions, Divider, Drawer, Tag } from 'antd';
 import './style.scss'
 const DrawerViewDetailOrder = ({openDrawer, setOpenDrawer , dataViewOrder}) => {
     const onClose = () => {
         setOpenDrawer(false);
       };
+     
+      const renderStatusTag = () => {
+        switch (dataViewOrder?.status) {
+          case "confirm":
+            return <Tag color='cyan'>Đã xác nhận đơn hàng</Tag>;
+            case "shipping":
+                return <Tag color='orange'>Đang giao hàng</Tag>;
+                case "succes":
+                    return <Tag color='green'>Giao hàng thành công</Tag>;
+                    case "cancel":
+                        return <Tag color='red'>Đã huỷ</Tag>;
+          default:
+            return null; // Or any default rendering for other statuses
+        }
+      };
     
     return (
     <div>
-     <Drawer title="Xem chi tiet don hang" onClose={onClose} open={openDrawer} width={800}>
+     <Drawer title="Xem chi tiet don hang" onClose={onClose} open={openDrawer} width={800} >
        <Descriptions title='' bordered column={2}>
        <Descriptions.Item label='ID đơn hàng'>
            {dataViewOrder._id}
+        </Descriptions.Item>
+        <Descriptions.Item label='ID khách hàng'>
+           {dataViewOrder.customerId}
         </Descriptions.Item>
         <Descriptions.Item label='Tên khách hàng'>
             {dataViewOrder?.customerName}
@@ -27,6 +45,12 @@ const DrawerViewDetailOrder = ({openDrawer, setOpenDrawer , dataViewOrder}) => {
         </Descriptions.Item>
         <Descriptions.Item label="Phương thức thanh toán">
             {dataViewOrder?.paymentMethod}
+        </Descriptions.Item>
+        <Descriptions.Item label="Trạng thái đơn hàng">
+            {renderStatusTag()}
+        </Descriptions.Item>
+        <Descriptions.Item label="Mã vận đơn">
+            {dataViewOrder?.shippingCode}
         </Descriptions.Item>
        </Descriptions>
         

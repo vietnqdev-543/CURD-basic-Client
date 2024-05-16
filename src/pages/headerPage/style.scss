@@ -22,27 +22,30 @@
         .cart{
             display: flex;
             align-items: center;
-            a{
-                color: black;
-                text-decoration: none;
-                font-size: 20px;
-                padding: 0 10px;
-            }
-            a:hover{
-                color: red;
-            }
+
+            // a{
+            //     color: black ;
+            //     text-decoration: none;
+            //     font-size: 20px;
+            //     padding: 0 10px;
+            // }
+            // a:hover{
+            //     color: red;
+            // }
             .userName{
                 flex-direction: row;
                 align-items: center;
                 display: flex;
                 justify-content: center;
                 cursor: pointer;
+                
                 .name{
                     text-transform: uppercase;
                     color: black ;
                     padding: 0 10px;
                 }
             }
+          
         }
     }
     .header-nav{
@@ -69,13 +72,6 @@
             font-weight: bold;
             padding-right: 30px;
             text-transform: uppercase;
-        }
-        .link{
-            text-decoration: none ;
-            color: white;
-            font-size: 20px;
-            text-transform: uppercase;
-            padding: 0 10px;
         }
     }
 }

@@ -26,6 +26,7 @@ import ContactPage from './pages/contactPage/ContactPage';
 import Cart from './pages/cartPage/Cart';
 import SuccesfullyOrder from './components/successfullyOrder/SuccesfullyOrder';
 import OrderManager from './pages/cartPage/orderManager/OrderManager';
+import LikeProduct from './pages/likeProduct/LikeProduct';
 
 function App() {
   const style = {margin : '0 40px'}
@@ -57,7 +58,8 @@ function App() {
         {path : '/contact' , element: <ContactPage />},
         {path:'/cart' , element: <Cart/>} ,
         {path:'/sucessfullyOrder' , element : <SuccesfullyOrder />},
-        {path : '/orderManager' , element: <OrderManager />}
+        {path : '/orderManager' , element: <OrderManager />} ,
+        {path : '/likeProduct', element : <LikeProduct />}
       ]
       
     },

@@ -11,7 +11,6 @@ import { useNavigate } from "react-router-dom";
 import { doLogoutAction } from "../../redux/account/acccountSlice";
 import UpdateUser from "../UpdateUser/UpdateUser";
 import { useState } from "react";
-import { FaRegUserCircle } from "react-icons/fa";
 
 const Header = () => {
   const isLogin = useSelector((state) => state.account.isLogin);
@@ -53,8 +52,13 @@ const Header = () => {
     },
     {
       key: "4",
+      label: <div onClick={()=>{navigate('/likeProduct')}}>Sản phẩm yêu thích</div>,
+    },
+    {
+      key: "5",
       label: <div onClick={() => handleLogout()}>Đăng xuất</div>,
     },
+    
   ];
 
   const handleNavigateCart = () => {
@@ -67,7 +71,7 @@ const Header = () => {
       <div className="header-container">
         <div className="header-top">
           <div className="nameBrand">HorizonHours</div>
-          <div className="cart">
+          <div className="cart"  >
             <Badge showZero count={carts.length}>
               <span
                 onClick={handleNavigateCart}
@@ -90,6 +94,7 @@ const Header = () => {
                           src={avatar}
                           size="medium"
                           icon={<UserOutlined />}
+                          style={{marginLeft:'10px'}}
                         />
                       </div>
                       <div className="name">{userName}</div>
@@ -99,19 +104,17 @@ const Header = () => {
                 </a>
               </Dropdown>
             ) : (
-              <div className="link">
-                <a href="/login">Login</a>
-                <a href="/register">Register</a>
+              <div style={{display:'flex' , margin:'0 30px' , fontWeight:'bold', textTransform : 'capitalize', gap:'10px'}}>
+                <a style={{ textDecoration: 'none' , padding: '8px 15px' , backgroundColor:'darkRed', borderRadius:'5px', color:'white'}} href="/login">Đăng nhập</a>
               </div>
             )}
           </div>
         </div>
         <div className="header-nav">
-          <a href="/">Home</a>
-          <a href="/product">Product</a>
-          <a href="/blog">Blog</a>
-          <a href="/contact">Contact</a>
-          <a href="#">About</a>
+          <a href="/">Trang chủ</a>
+          <a href="/product">Sản phẩm</a>
+          <a href="/blog">Bài viết</a>
+          <a href="/contact">Liên hệ</a>
         </div>
       </div>
     </div>
